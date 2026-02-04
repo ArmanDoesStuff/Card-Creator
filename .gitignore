@@ -1,0 +1,28 @@
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Node (if you ever add tooling)
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Build / output folders (if you add bundling later)
+dist/
+build/
+out/
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.temp
+
+# IDE/editor files
+.vscode/
+.idea/
+*.swp
+
+# Mac/Linux metadata
+*.cache

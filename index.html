@@ -10,27 +10,29 @@
 <body>
 
     <div id="layout"> <canvas id="card" width="400" height="600"></canvas>
-        <div id="controls">
-            <label> Style: <select id="cardStyle">
+        <div id="controls-wrapper">
+            <label><select id="cardStyle">
                     <option>Leader</option>
                     <option>Backline</option>
                     <option>Creature</option>
                     <option>Structure</option>
                     <option>Stratagem</option>
                 </select> </label>
-            <label data-types="Leader,Backline,Creature,Structure,Stratagem">Name: <input type="text" id="cardName"></label>
-            <div class="cost-row">
-                <label class="cost" data-types="Leader,Creature,Structure,Stratagem"> Red: <input id="costRed" type="text"> </label>
-                <label class="cost" data-types="Leader,Creature,Structure,Stratagem"> Blue: <input id="costBlue" type="text"> </label>
-                <label class="cost" data-types="Leader,Creature,Structure,Stratagem"> White: <input id="costWhite" type="text"> </label>
-                <label class="cost" data-types="Leader,Creature,Structure,Stratagem"> Green: <input id="costGreen" type="text"> </label>
-                <label class="cost" data-types="Leader,Creature,Structure,Stratagem"> Black: <input id="costBlack" type="text"> </label>
+            <div id="controls">
+                <label data-types="Leader,Backline,Creature,Structure,Stratagem">Name: <input type="text" id="cardName"></label>
+                <div id="cost" class="cost-row" data-types="Leader,Creature,Structure,Stratagem">
+                    <label>Red: <select id="costRed"></select></label>
+                    <label>Blue: <select id="costBlue"></select></label>
+                    <label>White: <select id="costWhite"></select></label>
+                    <label>Green: <select id="costGreen"></select></label>
+                    <label>Black: <select id="costBlack"></select></label>
+                </div>
+                <label data-types="Leader,Creature,Structure,Stratagem">Class: <input type="text" id="cardClass"></label>
+                <label data-types="Leader,Backline,Creature,Structure,Stratagem">Description: <textarea id="cardDesc"></textarea></label>
+                <label data-types="Leader,Backline,Creature,Structure,Stratagem">Lore: <textarea id="cardLore"></textarea></label>
+                <label data-types="Leader,Creature">Attack: <input type="text" id="cardAttack"></label>
+                <label data-types="Leader,Creature">Defence: <input type="text" id="cardDefence"></label>
             </div>
-            <label data-types="Leader,Creature,Structure,Stratagem">Class: <input type="text" id="cardClass"></label>
-            <label data-types="Leader,Backline,Creature,Structure,Stratagem">Description: <textarea id="cardDesc"></textarea></label>
-            <label data-types="Leader,Backline,Creature,Structure,Stratagem">Lore: <textarea id="cardLore"></textarea></label>
-            <label data-types="Leader,Creature">Attack: <input type="text" id="cardAttack"></label>
-            <label data-types="Leader,Creature">Defence: <input type="text" id="cardDefence"></label>
         </div>
     </div>
 

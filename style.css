@@ -4,6 +4,12 @@
     align-items: flex-start;
 }
 
+#controls-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
 #controls {
     display: flex;
     flex-direction: column;
@@ -11,7 +17,10 @@
     width: 250px;
 }
 
-.cost-row { display: flex; gap: 10px; }
+.cost-row {
+    display: flex;
+    gap: 10px;
+}
 
 #controls input,
 #controls textarea,
