@@ -1,0 +1,18 @@
+#layout {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+#controls {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 250px;
+}
+
+#controls input,
+#controls textarea,
+#controls select {
+    width: 100%;
+}

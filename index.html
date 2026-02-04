@@ -1,14 +1,35 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  <meta charset="UTF-8">
-  <title>Card Creator</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <title>Card Creator</title>
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-  <canvas id="card" width="400" height="600"></canvas>
+    <div id="layout"> <canvas id="card" width="400" height="600"></canvas>
+        <div id="controls">
+            <label> Style: <select id="cardStyle">
+                    <option>Leader</option>
+                    <option>Backline</option>
+                    <option>Creature</option>
+                    <option>Structure</option>
+                    <option>Stratagem</option>
+                </select> </label>
+            <label data-types="Leader,Backline,Creature,Structure,Stratagem">Name: <input type="text" id="cardName"></label>
+            <label data-types="Leader,Creature,Structure,Stratagem">Cost: <input type="text" id="cardCost"></label>
+            <label data-types="Leader,Creature,Structure,Stratagem">Class: <input type="text" id="cardClass"></label>
+            <label data-types="Leader,Backline,Creature,Structure,Stratagem">Description: <textarea id="cardDesc"></textarea></label>
+            <label data-types="Leader,Backline,Creature,Structure,Stratagem">Lore: <textarea id="cardLore"></textarea></label>
+            <label data-types="Leader,Creature">Attack: <input type="text" id="cardAttack"></label>
+            <label data-types="Leader,Creature">Defence: <input type="text" id="cardDefence"></label>
+        </div>
+    </div>
 
-  <script src="main.js"></script>
+
+    <script src="main.js"></script>
 </body>
+
 </html>
