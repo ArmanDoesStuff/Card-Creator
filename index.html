@@ -19,7 +19,13 @@
                     <option>Stratagem</option>
                 </select> </label>
             <label data-types="Leader,Backline,Creature,Structure,Stratagem">Name: <input type="text" id="cardName"></label>
-            <label data-types="Leader,Creature,Structure,Stratagem">Cost: <input type="text" id="cardCost"></label>
+            <div class="cost-row">
+                <label class="cost" data-types="Leader,Creature,Structure,Stratagem"> Red: <input id="costRed" type="text"> </label>
+                <label class="cost" data-types="Leader,Creature,Structure,Stratagem"> Blue: <input id="costBlue" type="text"> </label>
+                <label class="cost" data-types="Leader,Creature,Structure,Stratagem"> White: <input id="costWhite" type="text"> </label>
+                <label class="cost" data-types="Leader,Creature,Structure,Stratagem"> Green: <input id="costGreen" type="text"> </label>
+                <label class="cost" data-types="Leader,Creature,Structure,Stratagem"> Black: <input id="costBlack" type="text"> </label>
+            </div>
             <label data-types="Leader,Creature,Structure,Stratagem">Class: <input type="text" id="cardClass"></label>
             <label data-types="Leader,Backline,Creature,Structure,Stratagem">Description: <textarea id="cardDesc"></textarea></label>
             <label data-types="Leader,Backline,Creature,Structure,Stratagem">Lore: <textarea id="cardLore"></textarea></label>
@@ -27,7 +33,6 @@
             <label data-types="Leader,Creature">Defence: <input type="text" id="cardDefence"></label>
         </div>
     </div>
-
 
     <script src="main.js"></script>
 </body>

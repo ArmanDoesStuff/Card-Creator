@@ -69,12 +69,18 @@ function drawCard() {
   const L = layouts[style];
 
   const name = document.getElementById("cardName").value;
-  const cost = document.getElementById("cardCost").value;
   const cardClass = document.getElementById("cardClass").value;
   const desc = document.getElementById("cardDesc").value;
   const lore = document.getElementById("cardLore").value;
   const atk = document.getElementById("cardAttack").value;
   const def = document.getElementById("cardDefence").value;
+  const costs = [
+    { value: document.getElementById("costRed").value, color: "#780422" },
+    { value: document.getElementById("costBlue").value, color: "#77b3fe" },
+    { value: document.getElementById("costWhite").value, color: "#e7cb8f" },
+    { value: document.getElementById("costGreen").value, color: "#42a9af" },
+    { value: document.getElementById("costBlack").value, color: "black" }
+  ].filter(c => c.value); // keep only non‑zero ones
 
   ctx.fillStyle = "black";
 
@@ -85,10 +91,19 @@ function drawCard() {
   }
 
   // COST
-  if (L.cost && cost) {
-    ctx.font = "22px Arial";
-    ctx.fillText(cost, L.cost.x, L.cost.y);
+  let x = 0;
+  const y = L.cost.y;
+  const totalWidth = costs.length * 30;
+  if (style === "Leader") {
+    x = L.cost.x - totalWidth / 2;
+  } else {
+    x = L.cost.x - totalWidth;
   }
+  costs.forEach(c => {
+    ctx.fillStyle = c.color;
+    ctx.fillText(c.value, x, y);
+    x += 30;
+  });
 
   // CLASS
   if (L.class && cardClass) {
@@ -143,7 +158,6 @@ function wrapText(text, x, y, maxWidth, lineHeight) {
   ctx.fillText(line, x, y);
 }
 
-
 // Show/Hide the Inputs
 function updateVisibleInputs() {
   const style = document.getElementById("cardStyle").value;
@@ -162,12 +176,25 @@ function updateVisibleInputs() {
   });
 }
 
-
-
 // Add listeners
 const styleSelect = document.getElementById("cardStyle");
 styleSelect.addEventListener("change", loadFrame);
 styleSelect.addEventListener("change", updateVisibleInputs);
+["costRed","costBlue","costWhite","costGreen","costBlack"].forEach(id => {
+  const el = document.getElementById(id);
+
+  el.addEventListener("input", e => {
+    // keep only digits 1–9
+    e.target.value = e.target.value.replace(/[^1-9]/g, "");
+
+    // ensure only ONE digit
+    if (e.target.value.length > 1) {
+      e.target.value = e.target.value[0];
+    }
+
+    drawCard();
+  });
+});
 
 // Initial Load
 loadFrame();
