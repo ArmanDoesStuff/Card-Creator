@@ -8,7 +8,6 @@
 </head>
 
 <body>
-
     <div id="layout"> <canvas id="card" width="400" height="600"></canvas>
         <div id="controls-wrapper">
             <label><select id="cardStyle">
@@ -27,7 +26,7 @@
                     <label>Green: <select id="costGreen"></select></label>
                     <label>Black: <select id="costBlack"></select></label>
                 </div>
-                <label data-types="Leader,Creature,Structure,Stratagem">Class: <input type="text" id="cardClass"></label>
+                <label data-types="Leader,Creature,Structure">Class: <input type="text" id="cardClass"></label>
                 <label data-types="Leader,Backline,Creature,Structure,Stratagem">Description: <textarea id="cardDesc"></textarea></label>
                 <label data-types="Leader,Backline,Creature,Structure,Stratagem">Lore: <textarea id="cardLore"></textarea></label>
                 <label data-types="Leader,Creature">Attack: <input type="text" id="cardAttack"></label>
@@ -35,8 +34,7 @@
             </div>
         </div>
     </div>
-
-    <script src="main.js"></script>
+    <script type="module" src="main.js"></script>
 </body>
 
 </html>
