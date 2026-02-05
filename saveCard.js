@@ -1,49 +1,101 @@
 import { updateVisibleInputs } from "./inputs.js";
 import { drawCard, loadFrame } from "./drawCard.js";
 
+let currentDeck = null;
+let currentCardList = [];
+
 export function addToDeck() {
-    const deckName = document.getElementById("deckName").value.trim();
-    const name = document.getElementById("cardName").value;
-    //add card name to current deck if one exists
+    const cardName = document.getElementById("cardName").value;
+    if (!cardName || !currentDeck) return;
+    currentCardList.push(cardName);
+    refreshCardList();
     saveDeck();
-    refreshSavedCardsBox();
 }
 
 export function removeFromDeck() {
-    const deckName = document.getElementById("deckName").value.trim();
-    const name = document.getElementById("cardName").value;
-    //remove card name from current deck if one exists
+    const cardName = document.getElementById("cardName").value;
+    if (!cardName || !currentDeck) return;
+    currentCardList = currentCardList.filter(c => c !== cardName);
+    refreshCardList();
     saveDeck();
-    refreshSavedCardsBox();
 }
 
-export function saveDeck() {
+export function createDeck() {
     const name = document.getElementById("deckName").value.trim();
-    console.log(name);    
-    localStorage.setItem(`deck_${name}`, JSON.stringify(data));
+    if (!name) return;
+    currentDeck = name;
+    currentCardList = [];
+    saveDeck();
+    refreshDecksBox();
+}
+
+function saveDeck() {
+    const data = {
+        currentDeckList: currentCardList
+    };
+
+    localStorage.setItem(`deck_${currentDeck}`, JSON.stringify(data));
+}
+
+export function deselectDeck()
+{
+    currentDeck = null;
+    currentCardList = [];
+    setCardListDisplay();
     refreshDecksBox();
 }
 
 export function deleteDeck() {
-    const name = document.getElementById("deckName").value;
-    if (!name) {
+    if (!currentDeck) {
         return;
     }
-    const key = `deck_${name}`;
+    const key = `deck_${currentDeck}`;
     if (!localStorage.getItem(key)) {
         return;
     }
     localStorage.removeItem(key);
+    currentDeck = null;
+    currentCardList = [];
     refreshDecksBox();
 }
 
 function loadDeck(name) {
-    document.getElementById("deckName").value = name;
-    refreshDecksBox();
+    const raw = localStorage.getItem(`deck_${name}`);
+    if (!raw) return;
+
+    currentDeck = name;
+    document.getElementById("deckName").value = "";
+    const deck = JSON.parse(raw);
+    currentCardList = deck.currentDeckList || [];  // array of strings
+    pruneMissingCards();
+    setCardListDisplay();
+    refreshCardList();
+}
+
+function getAllCardNames() {
+    const names = [];
+
+    for (let key in localStorage) {
+        if (key.startsWith("card_")) {
+            names.push(key.replace("card_", ""));
+        }
+    }
+
+    return names;
+}
+
+function pruneMissingCards() {
+    const allCards = getAllCardNames();
+
+    // keep only cards that still exist
+    currentCardList = currentCardList.filter(name =>
+        allCards.includes(name)
+    );
 }
 
 
-function refreshDecksBox() {
+export function refreshDecksBox() {
+    setCardListDisplay();
     const box = document.getElementById("deckBox");
     box.innerHTML = "";
     for (let key in localStorage) {
@@ -57,7 +109,7 @@ function refreshDecksBox() {
             div.addEventListener("click", () => {
                 loadDeck(name);
 
-                // remove selection from all cards
+                // remove selection from all decks
                 document.querySelectorAll(".saved-deck").forEach(el =>
                     el.classList.remove("selected")
                 );
@@ -69,40 +121,60 @@ function refreshDecksBox() {
             box.appendChild(div);
         }
     }
+    refreshCardList();
+}
 
+function setCardListDisplay() {
+    const elements = document.querySelectorAll(".visibleWithActiveDeck");
+
+    const show = currentDeck !== null;
+
+    elements.forEach(el => {
+        el.style.display = show ? "" : "none";
+    });
 }
 
 export function refreshSavedCardsBox() {
     const cardBox = document.getElementById("cardBox");
     cardBox.innerHTML = "";
-    const cardListBox = document.getElementById("cardListBox");
-    cardBox.innerHTML = "";
-
 
     for (let key in localStorage) {
         if (key.startsWith("card_")) {
             const name = key.replace("card_", "");
 
-            const div = document.createElement("div");
-            div.textContent = name;
-            div.className = "saved-card";
-
-            div.addEventListener("click", () => {
-                loadCard(name);
-
-                // remove selection from all cards
-                document.querySelectorAll(".saved-card").forEach(el =>
-                    el.classList.remove("selected")
-                );
-
-                // add selection to this one
-                div.classList.add("selected");
-            });
-
-            cardBox.appendChild(div);
-            //cardListBox.appendChild(div); if name exists in current deck
+            const cardDiv = createSavedCardElement(name);
+            cardBox.appendChild(cardDiv);
         }
     }
+}
+
+function refreshCardList() {
+    const cardListBox = document.getElementById("cardListBox");
+    cardListBox.innerHTML = "";
+    for (let cardName of currentCardList) {
+        const cardListDiv = createSavedCardElement(cardName);
+        cardListBox.appendChild(cardListDiv);
+    }
+}
+
+function createSavedCardElement(name) {
+    const div = document.createElement("div");
+    div.textContent = name;
+    div.className = "saved-card";
+
+    div.addEventListener("click", () => {
+        loadCard(name);
+
+        // remove selection from all cards
+        document.querySelectorAll(".saved-card").forEach(el =>
+            el.classList.remove("selected")
+        );
+
+        // add selection to this one
+        div.classList.add("selected");
+    });
+
+    return div;
 }
 
 function getCardData() {
@@ -142,19 +214,16 @@ export function deleteCard() {
         return;
     }
     localStorage.removeItem(key);
+    pruneMissingCards();
     refreshSavedCardsBox();
+    refreshCardList();
 }
-
 
 export function loadCard(name) {
     const json = localStorage.getItem(`card_${name}`);
-    if (!json) return console.warn("No card found:", name);
+    if (!json) return;
 
     const data = JSON.parse(json);
-    applyCardData(data);
-}
-
-function applyCardData(data) {
     document.getElementById("cardStyle").value = data.style || "";
     document.getElementById("cardName").value = data.name || "";
     document.getElementById("cardClass").value = data.class || "";
