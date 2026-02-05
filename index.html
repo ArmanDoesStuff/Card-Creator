@@ -8,15 +8,23 @@
 </head>
 
 <body>
-    <div id="layout"> <canvas id="card" width="400" height="600"></canvas>
+    <div id="layout">
+
+        <div id="preview">
+            <canvas id="card" width="400" height="600"></canvas>
+        </div>
+
         <div id="controls-wrapper">
-            <label><select id="cardStyle">
+            <label>
+                <select id="cardStyle">
                     <option>Leader</option>
                     <option>Backline</option>
                     <option>Creature</option>
                     <option>Structure</option>
                     <option>Stratagem</option>
-                </select> </label>
+                </select>
+            </label>
+
             <div id="controls">
                 <label data-types="Leader,Backline,Creature,Structure,Stratagem">Name: <input type="text" id="cardName"></label>
                 <div id="cost" class="cost-row" data-types="Leader,Creature,Structure,Stratagem">
@@ -32,8 +40,27 @@
                 <label data-types="Leader,Creature">Attack: <input type="text" id="cardAttack"></label>
                 <label data-types="Leader,Creature">Defence: <input type="text" id="cardDefence"></label>
             </div>
+
+            <button id="saveCardBtn">Save card</button>
+            <button id="deleteCardBtn">Delete card</button>
+            <button id="clearCardBtn">Clear card</button>
+        </div>
+
+        <div id="cardBox-wrapper">
+            <div id="cardBox"></div>
+            <button id="addToDeckBtn">Add to Deck</button>
+            <button id="removeFromDeckBtn">Remove from Deck</button>
+        </div>
+
+        <div id="deckdBox-wrapper">
+            <label>Deck Name: <input type="text" id="deckName"></label>
+            <div id="deckBox"></div>
+            <button id="saveDeckBtn">Save Deck</button>
+            <button id="deleteDeckBtn">Delete Deck</button>
+            <div id="cardListBox"></div>
         </div>
     </div>
+
     <script type="module" src="main.js"></script>
 </body>
 

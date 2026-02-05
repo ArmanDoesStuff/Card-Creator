@@ -1,0 +1,175 @@
+import { updateVisibleInputs } from "./inputs.js";
+import { drawCard, loadFrame } from "./drawCard.js";
+
+export function addToDeck() {
+    const deckName = document.getElementById("deckName").value.trim();
+    const name = document.getElementById("cardName").value;
+    //add card name to current deck if one exists
+    saveDeck();
+    refreshSavedCardsBox();
+}
+
+export function removeFromDeck() {
+    const deckName = document.getElementById("deckName").value.trim();
+    const name = document.getElementById("cardName").value;
+    //remove card name from current deck if one exists
+    saveDeck();
+    refreshSavedCardsBox();
+}
+
+export function saveDeck() {
+    const name = document.getElementById("deckName").value.trim();
+    console.log(name);    
+    localStorage.setItem(`deck_${name}`, JSON.stringify(data));
+    refreshDecksBox();
+}
+
+export function deleteDeck() {
+    const name = document.getElementById("deckName").value;
+    if (!name) {
+        return;
+    }
+    const key = `deck_${name}`;
+    if (!localStorage.getItem(key)) {
+        return;
+    }
+    localStorage.removeItem(key);
+    refreshDecksBox();
+}
+
+function loadDeck(name) {
+    document.getElementById("deckName").value = name;
+    refreshDecksBox();
+}
+
+
+function refreshDecksBox() {
+    const box = document.getElementById("deckBox");
+    box.innerHTML = "";
+    for (let key in localStorage) {
+        if (key.startsWith("deck_")) {
+            const name = key.replace("deck_", "");
+
+            const div = document.createElement("div");
+            div.textContent = name;
+            div.className = "saved-deck";
+
+            div.addEventListener("click", () => {
+                loadDeck(name);
+
+                // remove selection from all cards
+                document.querySelectorAll(".saved-deck").forEach(el =>
+                    el.classList.remove("selected")
+                );
+
+                // add selection to this one
+                div.classList.add("selected");
+            });
+
+            box.appendChild(div);
+        }
+    }
+
+}
+
+export function refreshSavedCardsBox() {
+    const cardBox = document.getElementById("cardBox");
+    cardBox.innerHTML = "";
+    const cardListBox = document.getElementById("cardListBox");
+    cardBox.innerHTML = "";
+
+
+    for (let key in localStorage) {
+        if (key.startsWith("card_")) {
+            const name = key.replace("card_", "");
+
+            const div = document.createElement("div");
+            div.textContent = name;
+            div.className = "saved-card";
+
+            div.addEventListener("click", () => {
+                loadCard(name);
+
+                // remove selection from all cards
+                document.querySelectorAll(".saved-card").forEach(el =>
+                    el.classList.remove("selected")
+                );
+
+                // add selection to this one
+                div.classList.add("selected");
+            });
+
+            cardBox.appendChild(div);
+            //cardListBox.appendChild(div); if name exists in current deck
+        }
+    }
+}
+
+function getCardData() {
+    return {
+        style: document.getElementById("cardStyle").value,
+        name: document.getElementById("cardName").value,
+        class: document.getElementById("cardClass").value,
+        desc: document.getElementById("cardDesc").value,
+        lore: document.getElementById("cardLore").value,
+        attack: document.getElementById("cardAttack").value,
+        defence: document.getElementById("cardDefence").value,
+        cost: {
+            red: document.getElementById("costRed").value,
+            blue: document.getElementById("costBlue").value,
+            white: document.getElementById("costWhite").value,
+            green: document.getElementById("costGreen").value,
+            black: document.getElementById("costBlack").value
+        }
+    };
+}
+
+export function saveCard() {
+    const data = getCardData();
+    const name = (data.name || "unnamed").trim();
+
+    localStorage.setItem(`card_${name}`, JSON.stringify(data));
+    refreshSavedCardsBox();
+}
+
+export function deleteCard() {
+    const name = document.getElementById("cardName").value.trim();
+    if (!name) {
+        return;
+    }
+    const key = `card_${name}`;
+    if (!localStorage.getItem(key)) {
+        return;
+    }
+    localStorage.removeItem(key);
+    refreshSavedCardsBox();
+}
+
+
+export function loadCard(name) {
+    const json = localStorage.getItem(`card_${name}`);
+    if (!json) return console.warn("No card found:", name);
+
+    const data = JSON.parse(json);
+    applyCardData(data);
+}
+
+function applyCardData(data) {
+    document.getElementById("cardStyle").value = data.style || "";
+    document.getElementById("cardName").value = data.name || "";
+    document.getElementById("cardClass").value = data.class || "";
+    document.getElementById("cardDesc").value = data.desc || "";
+    document.getElementById("cardLore").value = data.lore || "";
+    document.getElementById("cardAttack").value = data.attack || "";
+    document.getElementById("cardDefence").value = data.defence || "";
+
+    document.getElementById("costRed").value = data.cost?.red || "";
+    document.getElementById("costBlue").value = data.cost?.blue || "";
+    document.getElementById("costWhite").value = data.cost?.white || "";
+    document.getElementById("costGreen").value = data.cost?.green || "";
+    document.getElementById("costBlack").value = data.cost?.black || "";
+
+    loadFrame();
+    updateVisibleInputs();
+    drawCard();
+}
