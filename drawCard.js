@@ -1,7 +1,6 @@
 
 import { layouts } from "./layouts.js";
 
-
 const canvas = document.getElementById("card");
 const ctx = canvas.getContext("2d");
 let frame = new Image();
@@ -20,6 +19,9 @@ export function loadFrame() {
 // Draw Card
 export function drawCard() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
+  const cardScale = 0.6;
+  canvas.width = frame.width * cardScale;
+  canvas.height = frame.height * cardScale;;
   ctx.drawImage(frame, 0, 0, canvas.width, canvas.height);
 
   const style = document.getElementById("cardStyle").value;
@@ -33,9 +35,9 @@ export function drawCard() {
   const def = document.getElementById("cardDefence").value;
   const costs = [
     { value: document.getElementById("costRed").value, color: "#780422" },
-    { value: document.getElementById("costBlue").value, color: "#77b3fe" },
-    { value: document.getElementById("costWhite").value, color: "#e7cb8f" },
-    { value: document.getElementById("costGreen").value, color: "#42a9af" },
+    { value: document.getElementById("costBlue").value, color: "#6c92fa" },
+    { value: document.getElementById("costWhite").value, color: "#bb984d" },
+    { value: document.getElementById("costGreen").value, color: "#90be23" },
     { value: document.getElementById("costBlack").value, color: "black" }
   ].filter(c => c.value); // keep only non‑zero ones
 

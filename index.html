@@ -10,11 +10,11 @@
 <body>
     <div id="layout">
 
-        <div class="colomn" id="preview">
-            <canvas id="card" width="400" height="600"></canvas>
+        <div class="column" id="preview">
+            <canvas id="card"></canvas>
         </div>
 
-        <div id="controls-wrapper">
+        <div class="column" id="controls-wrapper">
             <label>
                 <select id="cardStyle">
                     <option>Leader</option>
@@ -44,9 +44,11 @@
             <button id="saveCardBtn">Save card</button>
             <button id="deleteCardBtn">Delete card</button>
             <button id="clearCardBtn">Clear card</button>
+            <button id="exportImageBtn">Export PNG</button>
         </div>
 
-        <div id="cardBox-wrapper">
+        <div class="column" id="cardBox-wrapper">
+            <h3>All Cards</h3>
             <div class="selectionBox" id="cardBox"></div>
             <div class="visibleWithActiveDeck">
                 <button id="addToDeckBtn">Add to Deck</button>
@@ -54,22 +56,27 @@
             </div>
         </div>
 
-        <div id="deckdBox-wrapper">
+        <div class="column" id="deckdBox-wrapper">
             <label>Deck Name: <input type="text" id="deckName"></label>
             <button id="createDeckBtn">Create Deck</button>
             <button id="deleteDeckBtn">Delete Deck</button>
-                <h3>Deck List</h3>
+            <h3>Deck List</h3>
             <div class="selectionBox" id="deckBox"></div>
             <div class="visibleWithActiveDeck">
-                
-            <button id="deselectDeckBtn">Deselect Deck</button>
+                <button id="deselectDeckBtn">Deselect Deck</button>
                 <h3>Card List</h3>
                 <div class="selectionBox" id="cardListBox"></div>
+                <button id="exportDeckPngBtn">Export Deck PNGs</button>
+                <button id="exportDeckZipBtn">Export Deck Zip</button>
             </div>
+        </div>
+        <div class="column" id="storage-wrapper">
+            <button id="clearStorageBtn">Clear Storage</button>
         </div>
     </div>
 
     <script type="module" src="main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 </body>
 
 </html>

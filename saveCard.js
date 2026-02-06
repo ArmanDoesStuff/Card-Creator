@@ -1,5 +1,6 @@
 import { updateVisibleInputs } from "./inputs.js";
 import { drawCard, loadFrame } from "./drawCard.js";
+import { exportDeckAsPNGs, exportDeckAsZip } from "./export.js";
 
 let currentDeck = null;
 let currentCardList = [];
@@ -15,7 +16,7 @@ export function addToDeck() {
 export function removeFromDeck() {
     const cardName = document.getElementById("cardName").value;
     if (!cardName || !currentDeck) return;
-    currentCardList = currentCardList.filter(c => c !== cardName);
+    currentCardList = currentCardList.filter(c => c !== cardName); //TODO: Only remove the one at the element
     refreshCardList();
     saveDeck();
 }
@@ -27,6 +28,8 @@ export function createDeck() {
     currentCardList = [];
     saveDeck();
     refreshDecksBox();
+    setSelected(name, true);
+    document.getElementById("deckName").value = "";
 }
 
 function saveDeck() {
@@ -37,8 +40,7 @@ function saveDeck() {
     localStorage.setItem(`deck_${currentDeck}`, JSON.stringify(data));
 }
 
-export function deselectDeck()
-{
+export function deselectDeck() {
     currentDeck = null;
     currentCardList = [];
     setCardListDisplay();
@@ -74,13 +76,11 @@ function loadDeck(name) {
 
 function getAllCardNames() {
     const names = [];
-
     for (let key in localStorage) {
         if (key.startsWith("card_")) {
             names.push(key.replace("card_", ""));
         }
     }
-
     return names;
 }
 
@@ -172,10 +172,27 @@ function createSavedCardElement(name) {
 
         // add selection to this one
         div.classList.add("selected");
+        setSelected(name);
     });
 
     return div;
 }
+function deselectCardlistCards() {
+    document.querySelectorAll("#cardListBox .saved-card").forEach(el => {
+        el.classList.remove("selected");
+    });
+}
+
+function setSelected(name, isDeck = false) {
+    const selector = isDeck
+        ? "#deckBox .saved-deck"
+        : "#cardBox .saved-card";
+
+    document.querySelectorAll(selector).forEach(card => {
+        card.classList.toggle("selected", card.textContent === name);
+    });
+}
+
 
 function getCardData() {
     return {
@@ -201,7 +218,10 @@ export function saveCard() {
     const name = (data.name || "unnamed").trim();
 
     localStorage.setItem(`card_${name}`, JSON.stringify(data));
+    addToDeck();
     refreshSavedCardsBox();
+    setSelected(name);
+    deselectCardlistCards();
 }
 
 export function deleteCard() {
@@ -241,4 +261,16 @@ export function loadCard(name) {
     loadFrame();
     updateVisibleInputs();
     drawCard();
+}
+
+export function exportDeckPNG() {
+    if (!currentDeck || !currentCardList || currentCardList.length === 0) return;
+    pruneMissingCards();
+    exportDeckAsPNGs(currentCardList);
+}
+
+export function exportDeckZip() {
+    if (!currentDeck || !currentCardList || currentCardList.length === 0) return;
+    pruneMissingCards();
+    exportDeckAsZip(currentCardList);
 }

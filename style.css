@@ -11,12 +11,6 @@
 }
 
 /* Details column */
-#controls-wrapper {
-    padding: 0 20px;
-    border-right: 3px solid #444;
-    flex: 0 0 300px;
-    padding-top: 20px;
-}
 
 #controls-wrapper button {
     margin-top: 20px;
@@ -34,23 +28,11 @@
 }
 
 /* Cards column */
-
-#cardBox-wrapper {
-    padding-left: 15px;
-    padding-right: 15px;
-    border-right: 3px solid #444;
-}
-
 #cardBox-wrapper button {
     margin-top: 20px;
 }
 
 /* Decks column */
-#deckdBox-wrapper {
-    padding-left: 15px;
-    padding-right: 15px;
-    border-right: 3px solid #444;
-}
 
 
 #deckdBox-wrapper button {
@@ -58,6 +40,18 @@
 }
 
 /* Other */
+
+.column{
+    padding: 0 20px;
+    border-right: 3px solid #444;
+    flex: 0 0 300px;
+    padding-top: 20px;
+}
+
+column button {
+    margin-top: 20px;
+}
+
 
 .selected {
     font-weight: bold;

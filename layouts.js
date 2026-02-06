@@ -1,42 +1,42 @@
 export const layouts = {
   Leader: {
-    name: { x: 200, y: 47 },
-    cost: { x: 210, y: 71 },
-    class: { x: 43, y: 330 },
-    desc: { x: 30, y: 390, w: 340, lh: 22 },
-    lore: { x: 200, y: 520, w: 340, lh: 22 },
-    atk: { x: 35, y: 570 },
-    def: { x: 365, y: 570 }
+    name: { x: 223, y: 50 },
+    cost: { x: 226, y: 74 },
+    class: { x: 46, y: 342 },
+    desc: { x: 40, y: 410, w: 360, lh: 22 },
+    lore: { x: 223, y: 527, w: 340, lh: 22 },
+    atk: { x: 40, y: 590 },
+    def: { x: 406, y: 590 }
   },
 
   Backline: {
-    name: { x: 200, y: 55 },
-    desc: { x: 30, y: 390, w: 340, lh: 22 },
-    lore: { x: 200, y: 550, w: 340, lh: 22 }
+    name: { x: 223, y: 55 },
+    desc: { x: 40, y: 410, w: 360, lh: 22 },
+    lore: { x: 223, y: 550, w: 340, lh: 22 },
   },
 
   Creature: {
     name: { x: 30, y: 50 },
-    cost: { x: 380, y: 45 },
-    class: { x: 43, y: 330 },
-    desc: { x: 30, y: 390, w: 340, lh: 22 },
-    lore: { x: 200, y: 520, w: 340, lh: 22 },
-    atk: { x: 35, y: 570 },
-    def: { x: 365, y: 570 }
+    cost: { x: 408, y: 47 },
+    class: { x: 46, y: 342 },
+    desc: { x: 40, y: 410, w: 360, lh: 22 },
+    lore: { x: 223, y: 527, w: 340, lh: 22 },
+    atk: { x: 40, y: 590 },
+    def: { x: 406, y: 590 }
   },
 
   Structure: {
     name: { x: 30, y: 50 },
-    cost: { x: 380, y: 45 },
-    class: { x: 43, y: 330 },
-    desc: { x: 30, y: 390, w: 340, lh: 22 },
-    lore: { x: 200, y: 550, w: 340, lh: 22 }
+    cost: { x: 408, y: 47 },
+    class: { x: 46, y: 342 },
+    desc: { x: 40, y: 410, w: 360, lh: 22 },
+    lore: { x: 223, y: 550, w: 340, lh: 22 },
   },
 
   Stratagem: {
     name: { x: 30, y: 50 },
-    cost: { x: 380, y: 45 },
-    desc: { x: 30, y: 390, w: 340, lh: 22 },
-    lore: { x: 200, y: 550, w: 340, lh: 22 }
+    cost: { x: 408, y: 47 },
+    desc: { x: 40, y: 410, w: 360, lh: 22 },
+    lore: { x: 223, y: 550, w: 340, lh: 22 },
   }
 };
