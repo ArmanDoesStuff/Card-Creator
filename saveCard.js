@@ -215,7 +215,8 @@ function getCardData() {
 
 export function saveCard() {
     const data = getCardData();
-    const name = (data.name || "unnamed").trim();
+    const name = data.name.trim();
+    if (!name) return;
 
     localStorage.setItem(`card_${name}`, JSON.stringify(data));
     addToDeck();

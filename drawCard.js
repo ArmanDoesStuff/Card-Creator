@@ -81,15 +81,14 @@ export function drawCard() {
   if (L.desc && desc) {
     ctx.font = "20px Arial";
     ctx.textAlign = "left";
-    wrapText(desc, L.desc.x, L.desc.y, L.desc.w, L.desc.lh);
+    drawAutoSizedText(desc, L.desc.x, L.desc.y, L.desc.w, L.desc.h, L.desc.s);
   }
 
   // LORE
   if (L.lore && lore) {
     ctx.font = "italic 18px Arial";
     ctx.textAlign = "center";
-
-    wrapText(lore, L.lore.x, L.lore.y, L.lore.w, L.lore.lh);
+    drawAutoSizedText(lore, L.lore.x, L.lore.y, L.lore.w, L.lore.h, L.lore.s);
   }
 
   // ATK
@@ -107,24 +106,80 @@ export function drawCard() {
   }
 }
 
-function wrapText(text, x, y, maxWidth, lineHeight) {
-  if (!text) return;
+function drawAutoSizedText(text, x, y, maxWidth, maxHeight, baseFontSize, lineHeightFactor = 1.1) {
+    let fontSize = baseFontSize;
 
-  const words = text.split(" ");
-  let line = "";
+    while (fontSize > 8) {
+        ctx.font = `${fontSize}px Arial`;
+        const lineHeight = fontSize * lineHeightFactor;
 
-  for (let i = 0; i < words.length; i++) {
-    const testLine = line + words[i] + " ";
-    const width = ctx.measureText(testLine).width;
+        const height = measureWrappedTextHeight(text, maxWidth, lineHeight);
 
-    if (width > maxWidth) {
-      ctx.fillText(line, x, y);
-      line = words[i] + " ";
-      y += lineHeight;
-    } else {
-      line = testLine;
+        if (height <= maxHeight) {
+            wrapText(text, x, y, maxWidth, lineHeight);
+            return;
+        }
+
+        fontSize -= 1;
     }
-  }
 
-  ctx.fillText(line, x, y);
+    // fallback: draw anyway at minimum size
+    ctx.font = `8px Arial`;
+    wrapText(text, x, y, maxWidth, 8 * lineHeightFactor);
 }
+
+
+function measureWrappedTextHeight(text, maxWidth, lineHeight) {
+    const paragraphs = text.split("\n");
+    let height = 0;
+
+    for (const p of paragraphs) {
+        const words = p.split(" ");
+        let line = "";
+
+        for (let n = 0; n < words.length; n++) {
+            const testLine = line + words[n] + " ";
+            const testWidth = ctx.measureText(testLine).width;
+
+            if (testWidth > maxWidth && n > 0) {
+                height += lineHeight;
+                line = words[n] + " ";
+            } else {
+                line = testLine;
+            }
+        }
+
+        height += lineHeight; // last line of paragraph
+    }
+
+    return height;
+}
+
+
+function wrapText(text, x, y, maxWidth, lineHeight) {
+    if (!text) return;
+
+    const paragraphs = text.split("\n");
+
+    for (const p of paragraphs) {
+        const words = p.split(" ");
+        let line = "";
+
+        for (let i = 0; i < words.length; i++) {
+            const testLine = line + words[i] + " ";
+            const width = ctx.measureText(testLine).width;
+
+            if (width > maxWidth && i > 0) {
+                ctx.fillText(line, x, y);
+                line = words[i] + " ";
+                y += lineHeight;
+            } else {
+                line = testLine;
+            }
+        }
+
+        ctx.fillText(line, x, y);
+        y += lineHeight; // move down after each paragraph
+    }
+}
+

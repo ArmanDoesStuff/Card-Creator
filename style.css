@@ -5,6 +5,7 @@
     --row-odd: #c9c9c9;
     --row-even: #dfdfdf;
     --border-line: #444;
+    --hover: #e2e2e2;
 }
 
 .dark {
@@ -13,6 +14,7 @@
     --row-odd: #313131;
     --row-even: #464646;
     --border-line: #a7a7a7;
+    --hover: #505050;
 }
 
 body {
@@ -34,15 +36,26 @@ input::placeholder {
     opacity: 0.6;
 }
 
+#layout {
+    display: flex;
+    align-items: flex-start;
+}
+
+/* Button Effects */
+
 button {
     border: 1px solid var(--text);
     background: var(--bg);
     color: var(--text);
+    transition: background 0.15s ease, transform 0.1s ease, box-shadow 0.15s ease;
 }
 
-#layout {
-    display: flex;
-    align-items: flex-start;
+button:hover {
+    background: var(--hover) !important;
+}
+
+button:active {
+    transform: scale(0.94);
 }
 
 /* Title */
@@ -54,7 +67,7 @@ button {
 }
 
 .title-row h1 {
-    margin: 0; 
+    margin: 0;
 }
 
 
@@ -80,6 +93,13 @@ button {
 #controls textarea,
 #controls select {
     width: 100%;
+}
+
+.creature-stats {
+    display: flex;
+    gap: 1rem;
+    /* space between Attack and Defence */
+    align-items: center;
 }
 
 /* Cards column */
@@ -112,11 +132,11 @@ column button {
     font-weight: bold;
 }
 
-.selectionBox > div:nth-child(odd) {
+.selectionBox>div:nth-child(odd) {
     background: var(--row-odd);
 }
 
-.selectionBox > div:nth-child(even) {
+.selectionBox>div:nth-child(even) {
     background: var(--row-even);
 }
 

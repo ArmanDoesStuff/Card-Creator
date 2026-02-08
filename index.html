@@ -9,8 +9,8 @@
 
 <body>
     <div class="title-row">
-    <h1>Metal A Men Card Maker</h1>
-    <button id="themeToggle">Night Mode</button>
+        <h1>Anaxis - Card Maker</h1>
+        <button id="themeToggle">Night Mode</button>
     </div>
     <div id="layout">
 
@@ -41,8 +41,10 @@
                 <label data-types="Leader,Creature,Structure">Class: <input type="text" id="cardClass"></label>
                 <label data-types="Leader,Backline,Creature,Structure,Stratagem">Description: <textarea id="cardDesc"></textarea></label>
                 <label data-types="Leader,Backline,Creature,Structure,Stratagem">Lore: <textarea id="cardLore"></textarea></label>
-                <label data-types="Leader,Creature">Attack: <input type="text" id="cardAttack"></label>
-                <label data-types="Leader,Creature">Defence: <input type="text" id="cardDefence"></label>
+                <div class="creature-stats">
+                    <label data-types="Leader,Creature">Attack: <input type="text" id="cardAttack"></label>
+                    <label data-types="Leader,Creature">Defence: <input type="text" id="cardDefence"></label>
+                </div>
             </div>
 
             <button id="saveCardBtn">Save card</button>
