@@ -1,7 +1,62 @@
+/* Night Mode */
+:root {
+    --bg: #ffffff;
+    --text: #000000;
+    --row-odd: #c9c9c9;
+    --row-even: #dfdfdf;
+    --border-line: #444;
+}
+
+.dark {
+    --bg: #111111;
+    --text: #eeeeee;
+    --row-odd: #313131;
+    --row-even: #464646;
+    --border-line: #a7a7a7;
+}
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+input,
+button,
+textarea {
+    background: var(--bg);
+    color: var(--text);
+    border: 1px solid var(--text);
+}
+
+input::placeholder {
+    color: var(--text);
+    opacity: 0.6;
+}
+
+button {
+    border: 1px solid var(--text);
+    background: var(--bg);
+    color: var(--text);
+}
+
 #layout {
     display: flex;
     align-items: flex-start;
 }
+
+/* Title */
+
+.title-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.title-row h1 {
+    margin: 0; 
+}
+
 
 /* Preview column */
 #preview {
@@ -41,9 +96,9 @@
 
 /* Other */
 
-.column{
+.column {
     padding: 0 20px;
-    border-right: 3px solid #444;
+    border-right: 3px solid var(--border-line);
     flex: 0 0 300px;
     padding-top: 20px;
 }
@@ -57,12 +112,12 @@ column button {
     font-weight: bold;
 }
 
-.selectionBox>div:nth-child(odd) {
-    background: #cfcfcf;
+.selectionBox > div:nth-child(odd) {
+    background: var(--row-odd);
 }
 
-.selectionBox>div:nth-child(even) {
-    background: #ffffff;
+.selectionBox > div:nth-child(even) {
+    background: var(--row-even);
 }
 
 .selectionBox>div:first-child {
@@ -77,5 +132,3 @@ column button {
     width: 300px;
     cursor: pointer;
 }
-
-
