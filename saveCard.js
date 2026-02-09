@@ -219,7 +219,6 @@ export function saveCard() {
     if (!name) return;
 
     localStorage.setItem(`card_${name}`, JSON.stringify(data));
-    addToDeck();
     refreshSavedCardsBox();
     setSelected(name);
     deselectCardlistCards();
