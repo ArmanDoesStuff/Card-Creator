@@ -136,6 +136,12 @@ body {
     transition: background 0.3s ease, color 0.3s ease;
 }
 
+#storage-wrapper textarea {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+
 * {
     margin-bottom: 5px;
 }

@@ -40,8 +40,8 @@
                     <label>Black: <select id="costBlack"></select></label>
                 </div>
                 <label data-types="Leader,Creature,Structure">Class: <input type="text" id="cardClass"></label>
-                <label data-types="Leader,Backline,Creature,Structure,Augment,Stratagem">Description: <textarea id="cardDesc"></textarea></label>
-                <label data-types="Leader,Backline,Creature,Structure,Augment,Stratagem">Lore: <textarea id="cardLore"></textarea></label>
+                <label data-types="Leader,Backline,Creature,Structure,Augment,Stratagem">Description: <textarea id="cardDesc" rows="7"></textarea></label>
+                <label data-types="Leader,Backline,Creature,Structure,Augment,Stratagem">Lore: <textarea id="cardLore" rows="3"></textarea></label>
                 <div class="creature-stats">
                     <label data-types="Leader,Creature">Attack: <input type="text" id="cardAttack"></label>
                     <label data-types="Leader,Creature">Defence: <input type="text" id="cardDefence"></label>
@@ -85,7 +85,7 @@
             <button id="exportCardsJsonBtn">Export Cards JSON</button>
             <button id="importCardsJsonBtn">Import Cards JSON</button>
             <br>
-            <textarea id="exportOutput" rows="10" readonly></textarea>
+            <textarea id="storageTextBox" rows="15"></textarea>
         </div>
 
     </div>

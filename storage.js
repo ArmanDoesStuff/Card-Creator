@@ -21,11 +21,11 @@ export function exportCardsJson() {
         }
     }
 
-    document.getElementById("exportOutput").value = JSON.stringify(cards, null, 2); 
+    document.getElementById("storageTextBox").value = JSON.stringify(cards, null, 2); 
 }
 
 export function importCardsJson() {
-    const input = document.getElementById("exportOutput").value.trim();
+    const input = document.getElementById("storageTextBox").value.trim();
     if (!input) return;
 
     let cards;
