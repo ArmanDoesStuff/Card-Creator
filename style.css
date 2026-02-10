@@ -1,46 +1,3 @@
-/* Night Mode */
-:root {
-    --bg: #ffffff;
-    --text: #000000;
-    --row-odd: #c9c9c9;
-    --row-even: #dfdfdf;
-    --border-line: #444;
-    --hover: #e2e2e2;
-}
-
-.dark {
-    --bg: #111111;
-    --text: #eeeeee;
-    --row-odd: #313131;
-    --row-even: #464646;
-    --border-line: #a7a7a7;
-    --hover: #505050;
-}
-
-body {
-    background: var(--bg);
-    color: var(--text);
-    transition: background 0.3s ease, color 0.3s ease;
-}
-
-input,
-button,
-textarea {
-    background: var(--bg);
-    color: var(--text);
-    border: 1px solid var(--text);
-}
-
-input::placeholder {
-    color: var(--text);
-    opacity: 0.6;
-}
-
-#layout {
-    display: flex;
-    align-items: flex-start;
-}
-
 /* Button Effects */
 
 button {
@@ -79,14 +36,14 @@ button:active {
 }
 
 /* Details column */
-
-#controls-wrapper button {
-    margin-top: 20px;
-}
-
 .cost-row {
     display: flex;
     gap: 10px;
+}
+
+.cost-row label {
+    flex: 1;
+    /* all labels grow equally */
 }
 
 #controls input,
@@ -98,35 +55,10 @@ button:active {
 .creature-stats {
     display: flex;
     gap: 1rem;
-    /* space between Attack and Defence */
     align-items: center;
 }
 
-/* Cards column */
-#cardBox-wrapper button {
-    margin-top: 20px;
-}
-
-/* Decks column */
-
-
-#deckdBox-wrapper button {
-    margin-top: 20px;
-}
-
-/* Other */
-
-.column {
-    padding: 0 20px;
-    border-right: 3px solid var(--border-line);
-    flex: 0 0 300px;
-    padding-top: 20px;
-}
-
-column button {
-    margin-top: 20px;
-}
-
+/* Selection Box */
 
 .selected {
     font-weight: bold;
@@ -151,4 +83,59 @@ column button {
     margin-right: 15px;
     width: 300px;
     cursor: pointer;
+}
+
+/* Other */
+.column {
+    padding: 0 20px;
+    border-right: 3px solid var(--border-line);
+    flex: 0 0 300px;
+}
+
+#layout {
+    display: flex;
+    align-items: stretch;
+}
+
+/* Night Mode */
+:root {
+    --bg: #ffffff;
+    --text: #000000;
+    --row-odd: #c9c9c9;
+    --row-even: #dfdfdf;
+    --border-line: #444;
+    --hover: #e2e2e2;
+}
+
+.dark {
+    --bg: #111111;
+    --text: #eeeeee;
+    --row-odd: #313131;
+    --row-even: #464646;
+    --border-line: #a7a7a7;
+    --hover: #505050;
+}
+
+input,
+button,
+textarea,
+select {
+    background: var(--bg);
+    color: var(--text);
+    border: 1px solid var(--text);
+}
+
+input::placeholder {
+    color: var(--text);
+    opacity: 0.6;
+}
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+* {
+    margin-bottom: 5px;
 }

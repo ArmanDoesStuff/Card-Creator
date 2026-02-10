@@ -9,7 +9,7 @@ let frame = new Image();
 export function loadFrame() {
   const style = document.getElementById("cardStyle").value;
   frame = new Image();
-  frame.src = `templates/${style}.png`;   // e.g. templates/Leader.png
+  frame.src = `templates/${style}.png`;
   frame.onload = () => drawCard();
   document.getElementById("cardStyle").addEventListener("change", drawCard);
   document.querySelectorAll("#controls input, #controls textarea")
@@ -189,12 +189,14 @@ function drawStyledLine(line, x, y, fontSize, style, font) {
   const lineWidth = ctx.measureText(cleaned).width;
 
   // alignment fix
+  const originalAlign = ctx.textAlign
   let offsetX = x;
   if (ctx.textAlign === "center") {
     offsetX = x - lineWidth / 2;
   } else if (ctx.textAlign === "right") {
     offsetX = x - lineWidth;
   }
+  ctx.textAlign = "left";
 
   for (let i = 0; i < line.length; i++) {
     const c = line[i];
@@ -210,5 +212,8 @@ function drawStyledLine(line, x, y, fontSize, style, font) {
     ctx.fillText(c, offsetX, y);
     offsetX += ctx.measureText(c).width;
   }
+  ctx.textAlign = originalAlign;
+  
+  ctx.font = `${style} ${fontSize}px ${font}`;
   return style;
 }

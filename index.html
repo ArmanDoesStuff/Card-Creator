@@ -25,13 +25,14 @@
                     <option>Backline</option>
                     <option>Creature</option>
                     <option>Structure</option>
+                    <option>Augment</option>
                     <option>Stratagem</option>
                 </select>
             </label>
 
             <div id="controls">
-                <label data-types="Leader,Backline,Creature,Structure,Stratagem">Name: <input type="text" id="cardName"></label>
-                <div id="cost" class="cost-row" data-types="Leader,Creature,Structure,Stratagem">
+                <label data-types="Leader,Backline,Creature,Structure,Augment,Stratagem">Name: <input type="text" id="cardName"></label>
+                <div id="cost" class="cost-row" data-types="Leader,Creature,Structure,Augment,Stratagem">
                     <label>Red: <select id="costRed"></select></label>
                     <label>Blue: <select id="costBlue"></select></label>
                     <label>White: <select id="costWhite"></select></label>
@@ -39,8 +40,8 @@
                     <label>Black: <select id="costBlack"></select></label>
                 </div>
                 <label data-types="Leader,Creature,Structure">Class: <input type="text" id="cardClass"></label>
-                <label data-types="Leader,Backline,Creature,Structure,Stratagem">Description: <textarea id="cardDesc"></textarea></label>
-                <label data-types="Leader,Backline,Creature,Structure,Stratagem">Lore: <textarea id="cardLore"></textarea></label>
+                <label data-types="Leader,Backline,Creature,Structure,Augment,Stratagem">Description: <textarea id="cardDesc"></textarea></label>
+                <label data-types="Leader,Backline,Creature,Structure,Augment,Stratagem">Lore: <textarea id="cardLore"></textarea></label>
                 <div class="creature-stats">
                     <label data-types="Leader,Creature">Attack: <input type="text" id="cardAttack"></label>
                     <label data-types="Leader,Creature">Defence: <input type="text" id="cardDefence"></label>
@@ -64,8 +65,10 @@
 
         <div class="column" id="deckdBox-wrapper">
             <label>Deck Name: <input type="text" id="deckName"></label>
-            <button id="createDeckBtn">Create Deck</button>
-            <button id="deleteDeckBtn">Delete Deck</button>
+            <div>
+                <button id="createDeckBtn">Create Deck</button>
+                <button id="deleteDeckBtn">Delete Deck</button>
+            </div>
             <h3>Deck List</h3>
             <div class="selectionBox" id="deckBox"></div>
             <div class="visibleWithActiveDeck">
@@ -78,7 +81,13 @@
         </div>
         <div class="column" id="storage-wrapper">
             <button id="clearStorageBtn">Clear Storage</button>
+            <br>
+            <button id="exportCardsJsonBtn">Export Cards JSON</button>
+            <button id="importCardsJsonBtn">Import Cards JSON</button>
+            <br>
+            <textarea id="exportOutput" rows="10" readonly></textarea>
         </div>
+
     </div>
 
     <script type="module" src="main.js"></script>

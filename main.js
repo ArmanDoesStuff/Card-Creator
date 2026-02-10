@@ -2,7 +2,7 @@ import { drawCard, loadFrame } from "./drawCard.js";
 import { exportCurrentCardAsPNG } from "./export.js";
 import { updateVisibleInputs, resetAllInputs } from "./inputs.js";
 import { saveCard, deleteCard, refreshSavedCardsBox, createDeck, deleteDeck, deselectDeck, addToDeck, removeFromDeck, refreshDecksBox, exportDeckPNG, exportDeckZip } from "./saveCard.js"
-import {clearAppStorage} from "./storage.js"
+import { clearAppStorage, exportCardsJson, importCardsJson } from "./storage.js"
 
 
 // Add listeners
@@ -33,6 +33,8 @@ document.getElementById("deleteDeckBtn").addEventListener("click", deleteDeck);
 document.getElementById("deselectDeckBtn").addEventListener("click", deselectDeck);
 
 document.getElementById("clearStorageBtn").addEventListener("click", clearAppStorage);
+document.getElementById("exportCardsJsonBtn").addEventListener("click", exportCardsJson);
+document.getElementById("importCardsJsonBtn").addEventListener("click", importCardsJson);
 
 document.getElementById("exportImageBtn").addEventListener("click", exportCurrentCardAsPNG);
 document.getElementById("exportDeckPngBtn").addEventListener("click", exportDeckPNG);
