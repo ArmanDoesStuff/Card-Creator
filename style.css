@@ -60,6 +60,23 @@ button:active {
     margin: 3px 0;
 }
 
+#colourBarWrapper {
+    width: 100%;
+    height: 20px;
+    background: #222;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 10px;
+}
+
+#colourBar {
+    display: flex;
+    height: 100%;
+}
+
+.colour-segment {
+    height: 100%;
+}
 
 /* Selection Box */
 
@@ -75,6 +92,10 @@ button:active {
     background: var(--row-even);
 }
 
+.selectionBox > div.selected {
+    background: var(--row-selected);
+}
+
 .selectionBox>div:first-child {
     margin-top: 10px;
 }
@@ -86,6 +107,10 @@ button:active {
     margin-right: 15px;
     width: 300px;
     cursor: pointer;
+}
+
+.selectionBox {
+    margin-bottom: 15px;
 }
 
 /* Other */
@@ -106,6 +131,7 @@ button:active {
     --text: #000000;
     --row-odd: #c9c9c9;
     --row-even: #dfdfdf;
+    --row-selected: #9e9e9e;
     --border-line: #444;
     --hover: #e2e2e2;
 }
@@ -115,6 +141,7 @@ button:active {
     --text: #eeeeee;
     --row-odd: #313131;
     --row-even: #464646;
+    --row-selected: #797979;
     --border-line: #a7a7a7;
     --hover: #505050;
 }

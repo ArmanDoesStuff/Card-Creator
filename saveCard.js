@@ -25,10 +25,16 @@ export function addToDeck() {
 export function removeFromDeck() {
     const cardName = document.getElementById("cardName").value;
     if (!cardName || !currentDeck) return;
-    currentCardList = currentCardList.filter(c => c !== cardName); //TODO: Only remove the one at the element
+
+    const index = currentCardList.indexOf(cardName);
+    if (index !== -1) {
+        currentCardList.splice(index, 1); // removes ONE
+    }
+
     refreshCardList();
     saveDeck();
 }
+
 
 export function createDeck() {
     const name = document.getElementById("deckName").value.trim();
