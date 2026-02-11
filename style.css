@@ -52,12 +52,6 @@ button:active {
     width: 100%;
 }
 
-.creature-stats {
-    display: flex;
-    gap: 1rem;
-    align-items: center;
-}
-
 /* Selection Box */
 
 .selected {
@@ -141,6 +135,11 @@ body {
     box-sizing: border-box;
 }
 
+.same-line {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
 
 * {
     margin-bottom: 5px;

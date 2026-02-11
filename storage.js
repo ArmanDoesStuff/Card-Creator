@@ -1,4 +1,4 @@
-import { refreshSavedCardsBox } from "./saveCard.js";
+import { refreshSavedCardsBox, refreshDecksBox, currentDeck, setCurrentDeck, setCurrentCardList } from "./saveCard.js";
 
 export function clearAppStorage() {
     console.log("clearing storage");
@@ -51,4 +51,41 @@ export function importCardsJson() {
 
     // Refresh UI
     refreshSavedCardsBox();
+}
+
+export function exportDeckJson() {
+    if (!currentDeck) return;
+
+    const key = `deck_${currentDeck}`;
+    const data = JSON.parse(localStorage.getItem(key));
+
+    document.getElementById("storageTextBox").value =
+        JSON.stringify(data, null, 2);
+}
+
+export function importDeckJson() {
+    const input = document.getElementById("storageTextBox").value.trim();
+    if (!input) return;
+
+    let data;
+    try {
+        data = JSON.parse(input);
+    } catch {
+        alert("Invalid JSON");
+        return;
+    }
+
+    if (!data.name || !Array.isArray(data.currentDeckList)) {
+        alert("Deck JSON must contain { name, currentDeckList }");
+        return;
+    }
+
+    // Update memory
+    setCurrentDeck(data.name);
+    setCurrentCardList(data.currentDeckList);
+
+    // Save to storage
+    localStorage.setItem(`deck_${data.name}`, JSON.stringify(data));
+
+    refreshDecksBox();
 }

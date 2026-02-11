@@ -2,8 +2,16 @@ import { updateVisibleInputs } from "./inputs.js";
 import { drawCard, loadFrame } from "./drawCard.js";
 import { exportDeckAsPNGs, exportDeckAsZip } from "./export.js";
 
-let currentDeck = null;
-let currentCardList = [];
+export let currentDeck = null;
+export let currentCardList = [];
+
+export function setCurrentDeck(name) {
+    currentDeck = name;
+}
+
+export function setCurrentCardList(cardList) {
+    currentCardList = cardList;
+}
 
 export function addToDeck() {
     const cardName = document.getElementById("cardName").value;
@@ -34,11 +42,13 @@ export function createDeck() {
 
 function saveDeck() {
     const data = {
+        name: currentDeck,
         currentDeckList: currentCardList
     };
 
     localStorage.setItem(`deck_${currentDeck}`, JSON.stringify(data));
 }
+
 
 export function deselectDeck() {
     currentDeck = null;

@@ -42,7 +42,7 @@
                 <label data-types="Leader,Creature,Structure">Class: <input type="text" id="cardClass"></label>
                 <label data-types="Leader,Backline,Creature,Structure,Augment,Stratagem">Description: <textarea id="cardDesc" rows="7"></textarea></label>
                 <label data-types="Leader,Backline,Creature,Structure,Augment,Stratagem">Lore: <textarea id="cardLore" rows="3"></textarea></label>
-                <div class="creature-stats">
+                <div class="same-line">
                     <label data-types="Leader,Creature">Attack: <input type="text" id="cardAttack"></label>
                     <label data-types="Leader,Creature">Defence: <input type="text" id="cardDefence"></label>
                 </div>
@@ -65,9 +65,9 @@
 
         <div class="column" id="deckdBox-wrapper">
             <label>Deck Name: <input type="text" id="deckName"></label>
-            <div>
+            <div class="same-line">
                 <button id="createDeckBtn">Create Deck</button>
-                <button id="deleteDeckBtn">Delete Deck</button>
+                    <button id="deleteDeckBtn">Delete Deck</button>
             </div>
             <h3>Deck List</h3>
             <div class="selectionBox" id="deckBox"></div>
@@ -84,6 +84,9 @@
             <br>
             <button id="exportCardsJsonBtn">Export Cards JSON</button>
             <button id="importCardsJsonBtn">Import Cards JSON</button>
+            <br>
+            <button id="exportDeckJsonBtn">Export Deck JSON</button>
+            <button id="importDeckJsonBtn">Import Deck JSON</button>
             <br>
             <textarea id="storageTextBox" rows="15"></textarea>
         </div>
