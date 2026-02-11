@@ -1,6 +1,7 @@
 import { updateVisibleInputs } from "./inputs.js";
 import { drawCard, loadFrame } from "./drawCard.js";
 import { exportDeckAsPNGs, exportDeckAsZip } from "./export.js";
+import { drawDeckStats } from "./deckStats.js";
 
 export let currentDeck = null;
 export let currentCardList = [];
@@ -165,6 +166,7 @@ function refreshCardList() {
         const cardListDiv = createSavedCardElement(cardName);
         cardListBox.appendChild(cardListDiv);
     }
+    drawDeckStats(currentCardList);
 }
 
 function createSavedCardElement(name) {

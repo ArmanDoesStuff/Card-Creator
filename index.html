@@ -67,7 +67,7 @@
             <label>Deck Name: <input type="text" id="deckName"></label>
             <div class="same-line">
                 <button id="createDeckBtn">Create Deck</button>
-                    <button id="deleteDeckBtn">Delete Deck</button>
+                <button id="deleteDeckBtn">Delete Deck</button>
             </div>
             <h3>Deck List</h3>
             <div class="selectionBox" id="deckBox"></div>
@@ -78,6 +78,10 @@
                 <button id="exportDeckPngBtn">Export Deck PNGs</button>
                 <button id="exportDeckZipBtn">Export Deck Zip</button>
             </div>
+        </div>
+        <div class="column visibleWithActiveDeck" id="deckStats-wrapper">
+            <h1>Deck Stats</h1>
+            <canvas id="deckStatsCanvas"></canvas>
         </div>
         <div class="column" id="storage-wrapper">
             <button id="clearStorageBtn">Clear Storage</button>
@@ -96,6 +100,7 @@
     <script type="module" src="main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
     <script type="module" src="./night.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </body>
 
 </html>

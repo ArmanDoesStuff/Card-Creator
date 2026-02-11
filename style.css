@@ -52,6 +52,15 @@ button:active {
     width: 100%;
 }
 
+/* Deck Details column */
+.cost-bar {
+    background: #4a90e2;
+    color: white;
+    padding: 4px;
+    margin: 3px 0;
+}
+
+
 /* Selection Box */
 
 .selected {
