@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="e-GB">
 
 <head>
     <meta charset="UTF-8">
@@ -63,7 +63,7 @@
             </div>
         </div>
 
-        <div class="column" id="deckdBox-wrapper">
+        <div class="column" id="deckBox-wrapper">
             <label>Deck Name: <input type="text" id="deckName"></label>
             <div class="same-line">
                 <button id="createDeckBtn">Create Deck</button>
@@ -81,10 +81,13 @@
         </div>
         <div class="column visibleWithActiveDeck" id="deckStats-wrapper">
             <h1>Deck Stats</h1>
-            <h2 id="deckSizeHeader"></h2>
-            <h2>Cost Distibution</h2>
+            <h2>Card Counts</h2>
+            <div id="cardCounts"></div>
+            <h2>Cost Distribution</h2>
             <canvas id="deckStatsCanvas"></canvas>
-            <h2>Colour Distibution</h2>
+            <h2>Style Distribution</h2>
+            <canvas id="styleStatsCanvas"></canvas>
+            <h2>Colour Distribution</h2>
             <div id="colourBarWrapper">
                 <div id="colourBar"></div>
             </div>

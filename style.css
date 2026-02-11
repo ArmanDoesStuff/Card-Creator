@@ -137,7 +137,7 @@ button:active {
 }
 
 .dark {
-    --bg: #111111;
+    --bg: #0f171f;
     --text: #eeeeee;
     --row-odd: #313131;
     --row-even: #464646;

@@ -1,11 +1,17 @@
+import {layouts} from "./layouts.js";
+
 export function drawDeckStats(cardList) {
-    // Update deck size header
-    const deckSizeHeader = document.getElementById("deckSizeHeader");
-    deckSizeHeader.textContent = `Deck Size: ${cardList.length}`;
+    // Card counts
+    const detailStats = computeDeckDetailStats(cardList);
+    renderDeckDetails(detailStats);
 
     // Cost curve
     const costStats = computeCostStats(cardList);
     renderCostGraph(costStats);
+
+    // Style curve
+    const styleStats = computeStyleStats(cardList);
+    renderStyleGraph(styleStats);
 
     // Colour distribution bar
     const colourTotals = computeColourStats(cardList);
@@ -16,6 +22,35 @@ export function drawDeckStats(cardList) {
 function loadCard(name) {
     const raw = localStorage.getItem(`card_${name}`);
     return raw ? JSON.parse(raw) : null;
+}
+
+//Card Counts
+
+function computeDeckDetailStats(cardList) {
+    let leaderCount = 0;
+    let backlineCount = 0;
+    let otherCount = 0;
+
+    for (const cardName of cardList) {
+        const card = loadCard(cardName);
+        if (!card || !card.style) continue;
+
+        if (card.style === "Leader") leaderCount++;
+        else if (card.style === "Backline") backlineCount++;
+        else otherCount++;
+    }
+
+    return {leaderCount, backlineCount, otherCount};
+}
+
+function renderDeckDetails(stats) {
+    const div = document.getElementById("cardCounts");
+
+    div.innerHTML = `
+        <div>Leader: ${stats.leaderCount}/1</div>
+        <div>Regulars: ${stats.otherCount}/30</div>
+        <div>Backlines: ${stats.backlineCount}/9</div>
+    `;
 }
 
 //Cost Bar
@@ -68,7 +103,7 @@ function renderCostGraph(costCounts) {
             datasets: [{
                 label: "Card Costs",
                 data: values,
-                backgroundColor: "#4a90e2"
+                backgroundColor: layouts.Colours.relic
             }]
         },
         options: {
@@ -91,10 +126,73 @@ function renderCostGraph(costCounts) {
     });
 }
 
+//Style Bar
+let styleChart = null;
+
+function computeStyleStats(cardList) {
+    const styles = ["Creature", "Structure", "Augment", "Stratagem"];
+    const totals = Object.fromEntries(styles.map(s => [s, 0]));
+
+    for (const cardName of cardList) {
+        const card = loadCard(cardName);
+        if (!card || !card.style) continue;
+
+        if (totals.hasOwnProperty(card.style)) {
+            totals[card.style]++;
+        }
+    }
+
+    return totals;
+}
+
+function renderStyleGraph(styleStats) {
+    const ctx = document.getElementById("styleStatsCanvas").getContext("2d");
+
+    const labels = Object.keys(styleStats);
+    const values = Object.values(styleStats);
+
+    if (styleChart) {
+        styleChart.destroy();
+    }
+
+    styleChart = new Chart(ctx, {
+        type: "bar",
+        data: {
+            labels,
+            datasets: [{
+                label: "Card Styles",
+                data: values,
+                backgroundColor: [
+                    layouts.Colours.rage, // Creature
+                    layouts.Colours.stoic, // Structure
+                    layouts.Colours.chem, // Augment
+                    layouts.Colours.tech  // Stratagem
+                ]
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {display: false}
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        precision: 0,
+                        stepSize: 1
+                    }
+                }
+            }
+        }
+    });
+}
+
+
 //Colour Bar
 
 function computeColourStats(cardList) {
-    const totals = { red: 0, blue: 0, white: 0, green: 0, black: 0 };
+    const totals = {red: 0, blue: 0, white: 0, green: 0, black: 0};
 
     for (const cardName of cardList) {
         const card = loadCard(cardName);
@@ -124,11 +222,11 @@ function renderColourBar(percentages) {
     bar.innerHTML = "";
 
     const colours = {
-        red: "#e74c3c",
-        blue: "#3498db",
-        white: "#ecf0f1",
-        green: "#2ecc71",
-        black: "#2c3e50"
+        red: layouts.Colours.rage,
+        blue: layouts.Colours.tech,
+        white: layouts.Colours.stoic,
+        green: layouts.Colours.chem,
+        black: layouts.Colours.relic
     };
 
     for (const colour in percentages) {

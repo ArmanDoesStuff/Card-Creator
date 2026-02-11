@@ -34,11 +34,11 @@ export function drawCard() {
   const atk = document.getElementById("cardAttack").value;
   const def = document.getElementById("cardDefence").value;
   const costs = [
-    { value: document.getElementById("costRed").value, color: "#780422" },
-    { value: document.getElementById("costBlue").value, color: "#6c92fa" },
-    { value: document.getElementById("costWhite").value, color: "#bb984d" },
-    { value: document.getElementById("costGreen").value, color: "#90be23" },
-    { value: document.getElementById("costBlack").value, color: "black" }
+    { value: document.getElementById("costRed").value, color: layouts.Colours.rage },
+    { value: document.getElementById("costBlue").value, color: layouts.Colours.tech},
+    { value: document.getElementById("costWhite").value, color: layouts.Colours.stoic},
+    { value: document.getElementById("costGreen").value, color: layouts.Colours.chem},
+    { value: document.getElementById("costBlack").value, color: layouts.Colours.relic}
   ].filter(c => c.value); // keep only non‑zero ones
 
   // COST

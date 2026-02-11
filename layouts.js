@@ -45,5 +45,13 @@ export const layouts = {
     cost: { x: 408, y: 47 },
     desc: { x: 40, y: 410, w: 360, h: 140, s: 20 },
     lore: { x: 223, y: 550, w: 340, h: 50, s: 18 },
+  },
+
+  Colours: {
+    rage: "#780422",
+    tech: "#6c92fa",
+    stoic: "#bb984d",
+    chem: "#90be23",
+    relic: "#2c3e50",
   }
 };
