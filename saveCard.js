@@ -141,6 +141,12 @@ export function refreshDecksBox() {
     refreshCardList();
 }
 
+export function selectLast(){
+    const decks = document.querySelectorAll(".saved-deck"); 
+    if (decks.length > 0) 
+        { decks[decks.length - 1].click(); }
+}
+
 function setCardListDisplay() {
     const elements = document.querySelectorAll(".visibleWithActiveDeck");
 
@@ -173,6 +179,10 @@ function refreshCardList() {
         cardListBox.appendChild(cardListDiv);
     }
     drawDeckStats(currentCardList);
+    
+    const cards = document.querySelectorAll(".saved-card"); 
+    if (cards.length > 0) 
+        { cards[cards.length - 1].click(); }
 }
 
 function createSavedCardElement(name) {
@@ -240,6 +250,9 @@ export function saveCard() {
     refreshSavedCardsBox();
     setSelected(name);
     deselectCardlistCards();
+    if (!currentCardList.includes(name)) {
+        addToDeck();
+    }
 }
 
 export function deleteCard() {

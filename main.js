@@ -1,7 +1,7 @@
 import { drawCard, loadFrame } from "./drawCard.js";
 import { exportCurrentCardAsPNG } from "./export.js";
 import { updateVisibleInputs, resetAllInputs } from "./inputs.js";
-import { saveCard, deleteCard, refreshSavedCardsBox, createDeck, deleteDeck, deselectDeck, addToDeck, removeFromDeck, refreshDecksBox, exportDeckPNG, exportDeckZip } from "./saveCard.js"
+import { saveCard, deleteCard, refreshSavedCardsBox, createDeck, deleteDeck, deselectDeck, addToDeck, removeFromDeck, refreshDecksBox, exportDeckPNG, exportDeckZip, selectLast } from "./saveCard.js"
 import { clearAppStorage, exportCardsJson, importCardsJson, exportDeckJson,importDeckJson } from "./storage.js"
 
 
@@ -32,7 +32,12 @@ document.getElementById("createDeckBtn").addEventListener("click", createDeck);
 document.getElementById("deleteDeckBtn").addEventListener("click", deleteDeck);
 document.getElementById("deselectDeckBtn").addEventListener("click", deselectDeck);
 
-document.getElementById("clearStorageBtn").addEventListener("click", clearAppStorage);
+document.getElementById("clearStorageBtn").addEventListener("click", () => {
+    if (confirm("Are you sure you want to clear ALL saved cards and decks?")) {
+        clearAppStorage();
+    }
+});
+
 document.getElementById("exportCardsJsonBtn").addEventListener("click", exportCardsJson);
 document.getElementById("importCardsJsonBtn").addEventListener("click", importCardsJson);
 document.getElementById("exportDeckJsonBtn").addEventListener("click", exportDeckJson);
@@ -48,3 +53,4 @@ updateVisibleInputs();
 costIds.forEach(id => { document.getElementById(id).addEventListener("change", drawCard); });
 refreshSavedCardsBox();
 refreshDecksBox();
+selectLast();

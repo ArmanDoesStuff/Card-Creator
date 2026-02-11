@@ -1,7 +1,13 @@
 export function drawDeckStats(cardList) {
+    // Update deck size header
+    const deckSizeHeader = document.getElementById("deckSizeHeader");
+    deckSizeHeader.textContent = `Deck Size: ${cardList.length}`;
+
+    // Cost curve
     const costStats = computeCostStats(cardList);
     renderCostGraph(costStats);
 
+    // Colour distribution bar
     const colourTotals = computeColourStats(cardList);
     const colourPercentages = computeColourPercentages(colourTotals);
     renderColourBar(colourPercentages);

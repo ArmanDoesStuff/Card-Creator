@@ -81,18 +81,15 @@
         </div>
         <div class="column visibleWithActiveDeck" id="deckStats-wrapper">
             <h1>Deck Stats</h1>
+            <h2 id="deckSizeHeader"></h2>
             <h2>Cost Distibution</h2>
-            <canvas id="deckStatsCanvas"></canvas>            
+            <canvas id="deckStatsCanvas"></canvas>
             <h2>Colour Distibution</h2>
-<div id="colourBarWrapper">
-    <div id="colourBar"></div>
-</div>
-
-
+            <div id="colourBarWrapper">
+                <div id="colourBar"></div>
+            </div>
         </div>
         <div class="column" id="storage-wrapper">
-            <button id="clearStorageBtn">Clear Storage</button>
-            <br>
             <button id="exportCardsJsonBtn">Export Cards JSON</button>
             <button id="importCardsJsonBtn">Import Cards JSON</button>
             <br>
@@ -100,8 +97,9 @@
             <button id="importDeckJsonBtn">Import Deck JSON</button>
             <br>
             <textarea id="storageTextBox" rows="15"></textarea>
+            <br>
+            <button id="clearStorageBtn">Clear Storage</button>
         </div>
-
     </div>
 
     <script type="module" src="main.js"></script>
