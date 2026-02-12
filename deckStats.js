@@ -1,4 +1,5 @@
 import {layouts} from "./layouts.js";
+import {currentDeckId} from "./saveCard.js";
 
 export function drawDeckStats(cardList) {
     // Card counts
@@ -19,8 +20,8 @@ export function drawDeckStats(cardList) {
     renderColourBar(colourPercentages);
 }
 
-function loadCard(name) {
-    const raw = localStorage.getItem(`card_${name}`);
+function loadCard(id) {
+    const raw = localStorage.getItem(id);
     return raw ? JSON.parse(raw) : null;
 }
 
@@ -31,8 +32,8 @@ function computeDeckDetailStats(cardList) {
     let backlineCount = 0;
     let otherCount = 0;
 
-    for (const cardName of cardList) {
-        const card = loadCard(cardName);
+    for (const cardId of cardList) {
+        const card = loadCard(cardId);
         if (!card || !card.style) continue;
 
         if (card.style === "Leader") leaderCount++;
@@ -60,8 +61,8 @@ function computeCostStats(cardList) {
     const costCounts = {};
     let maxCost = 0;
 
-    for (const cardName of cardList) {
-        const card = loadCard(cardName);
+    for (const cardId of cardList) {
+        const card = loadCard(cardId);
         if (!card || !card.cost) continue;
 
         const totalCost =
@@ -133,8 +134,8 @@ function computeStyleStats(cardList) {
     const styles = ["Creature", "Structure", "Augment", "Stratagem"];
     const totals = Object.fromEntries(styles.map(s => [s, 0]));
 
-    for (const cardName of cardList) {
-        const card = loadCard(cardName);
+    for (const cardId of cardList) {
+        const card = loadCard(cardId);
         if (!card || !card.style) continue;
 
         if (totals.hasOwnProperty(card.style)) {
@@ -194,8 +195,8 @@ function renderStyleGraph(styleStats) {
 function computeColourStats(cardList) {
     const totals = {red: 0, blue: 0, white: 0, green: 0, black: 0};
 
-    for (const cardName of cardList) {
-        const card = loadCard(cardName);
+    for (const cardId of cardList) {
+        const card = loadCard(cardId);
         if (!card || !card.cost) continue;
 
         for (const colour in totals) {

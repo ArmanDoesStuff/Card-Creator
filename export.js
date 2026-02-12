@@ -9,10 +9,10 @@ export function exportCurrentCardAsPNG() {
 }
 
 export async function exportDeckAsPNGs(cardList) {
-    for (const cardName of cardList) {
-        loadCard(cardName)      // update preview
+    for (const cardId of cardList) {
+        const name = loadCard(cardId)      // update preview
         await waitForDOM();      // wait for DOM to render
-        await exportCardAsPNG(cardName);  // export PNG
+        await exportCardAsPNG(name);  // export PNG
     }
 }
 
@@ -37,14 +37,14 @@ async function renderCardToPNG(name) {
 export async function exportDeckAsZip(cardList) {
     const zip = new JSZip();
 
-    for (const cardName of cardList) {
-        loadCard(cardName);
+    for (const cardId of cardList) {
+        const name = loadCard(cardId);
         await waitForDOM();
 
-        const pngData = await renderCardToPNG(cardName);
+        const pngData = await renderCardToPNG(cardId);
 
         // Add to ZIP
-        zip.file(`${cardName}.png`, pngData, { base64: true });
+        zip.file(`${name}.png`, pngData, { base64: true });
     }
 
     // Generate ZIP and download

@@ -1,4 +1,6 @@
 // Show/Hide the Inputs
+import {drawCard} from "./drawCard.js";
+
 export function updateVisibleInputs() {
   const style = document.getElementById("cardStyle").value;
 
@@ -12,4 +14,5 @@ export function updateVisibleInputs() {
 export function resetAllInputs() {
   document.querySelectorAll("#controls input, #controls textarea, #controls select")
     .forEach(el => el.value = "");
+  drawCard()
 }

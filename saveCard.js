@@ -1,13 +1,14 @@
-import { updateVisibleInputs } from "./inputs.js";
-import { drawCard, loadFrame } from "./drawCard.js";
-import { exportDeckAsPNGs, exportDeckAsZip } from "./export.js";
-import { drawDeckStats } from "./deckStats.js";
+import {resetAllInputs, updateVisibleInputs} from "./inputs.js";
+import {drawCard, loadFrame} from "./drawCard.js";
+import {exportDeckAsPNGs, exportDeckAsZip} from "./export.js";
+import {drawDeckStats} from "./deckStats.js";
 
-export let currentDeck = null;
+let currentCardId = null;
+export let currentDeckId = null;
 export let currentCardList = [];
 
-export function setCurrentDeck(name) {
-    currentDeck = name;
+export function setCurrentDeck(id) {
+    currentDeckId = id;
 }
 
 export function setCurrentCardList(cardList) {
@@ -15,116 +16,132 @@ export function setCurrentCardList(cardList) {
 }
 
 export function addToDeck() {
-    const cardName = document.getElementById("cardName").value;
-    if (!cardName || !currentDeck) return;
-    currentCardList.push(cardName);
-    refreshCardList();
-    saveDeck();
+    if (!currentCardId || !currentDeckId) return;
+    currentCardList.push(currentCardId);
+    overwriteDeck();
+    refreshCardListBox();
+    setElementVisibility();
 }
 
 export function removeFromDeck() {
-    const cardName = document.getElementById("cardName").value;
-    if (!cardName || !currentDeck) return;
+    if (!currentCardId || !currentDeckId) return;
 
-    const index = currentCardList.indexOf(cardName);
+    const index = currentCardList.indexOf(currentCardId);
     if (index !== -1) {
-        currentCardList.splice(index, 1); // removes ONE
+        currentCardList.splice(index, 1);
     }
-
-    refreshCardList();
-    saveDeck();
+    overwriteDeck();
+    refreshCardListBox();
+    setElementVisibility();
 }
-
 
 export function createDeck() {
-    const name = document.getElementById("deckName").value.trim();
-    if (!name) return;
-    currentDeck = name;
+    const deckName = document.getElementById("deckName").value.trim();
+    if (!deckName) {
+        return;
+    }
+    currentDeckId = `deck_${crypto.randomUUID()}`;
     currentCardList = [];
-    saveDeck();
+    saveDeck(deckName);
     refreshDecksBox();
-    setSelected(name, true);
     document.getElementById("deckName").value = "";
+    setSelected(currentDeckId, true);
 }
 
-function saveDeck() {
+function saveDeck(deckName) {
+    if (!deckName) {
+        console.error("No deck name set")
+        return;
+    }
     const data = {
-        name: currentDeck,
+        name: deckName,
         currentDeckList: currentCardList
     };
-
-    localStorage.setItem(`deck_${currentDeck}`, JSON.stringify(data));
+    localStorage.setItem(currentDeckId, JSON.stringify(data));
 }
 
+export function renameDeck() {
+    const name = document.getElementById("deckName").value;
+    saveDeck(name);
+    refreshDecksBox();
+    setSelected(currentDeckId, true)
+}
+
+function overwriteDeck() {
+    const deckName = getDeckData(currentDeckId).name;
+    saveDeck(deckName);
+}
 
 export function deselectDeck() {
-    currentDeck = null;
+    currentDeckId = null;
     currentCardList = [];
-    setCardListDisplay();
+    setElementVisibility();
     refreshDecksBox();
 }
 
 export function deleteDeck() {
-    if (!currentDeck) {
+    if (!currentDeckId) {
         return;
     }
-    const key = `deck_${currentDeck}`;
-    if (!localStorage.getItem(key)) {
+    if (!localStorage.getItem(currentDeckId)) {
         return;
     }
-    localStorage.removeItem(key);
-    currentDeck = null;
+    localStorage.removeItem(currentDeckId);
+    currentDeckId = null;
     currentCardList = [];
     refreshDecksBox();
 }
 
-function loadDeck(name) {
-    const raw = localStorage.getItem(`deck_${name}`);
-    if (!raw) return;
-
-    currentDeck = name;
-    document.getElementById("deckName").value = "";
-    const deck = JSON.parse(raw);
-    currentCardList = deck.currentDeckList || [];  // array of strings
-    pruneMissingCards();
-    setCardListDisplay();
-    refreshCardList();
+function getDeckData(deckID) {
+    const raw = localStorage.getItem(deckID);
+    if (!raw) {
+        console.error(`failed to load ${deckID}`);
+        return;
+    }
+    return JSON.parse(raw);
 }
 
-function getAllCardNames() {
+function loadDeck(deckID) {
+    currentDeckId = deckID;
+    const deck = getDeckData(deckID);
+    currentCardList = deck.currentDeckList || [];  // array of strings
+    pruneMissingCards();
+    setElementVisibility();
+    refreshCardListBox();
+}
+
+function getAllCardIds() {
     const names = [];
     for (let key in localStorage) {
         if (key.startsWith("card_")) {
-            names.push(key.replace("card_", ""));
+            names.push(key);
         }
     }
     return names;
 }
 
 function pruneMissingCards() {
-    const allCards = getAllCardNames();
+    const allCards = getAllCardIds();
 
     // keep only cards that still exist
-    currentCardList = currentCardList.filter(name =>
-        allCards.includes(name)
+    currentCardList = currentCardList.filter(id =>
+        allCards.includes(id)
     );
 }
 
-
 export function refreshDecksBox() {
-    setCardListDisplay();
+    setElementVisibility();
     const box = document.getElementById("deckBox");
     box.innerHTML = "";
-    for (let key in localStorage) {
-        if (key.startsWith("deck_")) {
-            const name = key.replace("deck_", "");
-
+    for (let id in localStorage) {
+        if (id.startsWith("deck_")) {
+            const deckData = getDeckData(id);
             const div = document.createElement("div");
-            div.textContent = name;
+            div.textContent = deckData.name;
             div.className = "saved-deck";
-
+            console.log(deckData.name);
             div.addEventListener("click", () => {
-                loadDeck(name);
+                loadDeck(id);
 
                 // remove selection from all decks
                 document.querySelectorAll(".saved-deck").forEach(el =>
@@ -136,94 +153,103 @@ export function refreshDecksBox() {
             });
 
             box.appendChild(div);
+            div.dataset.id = id;
         }
     }
-    refreshCardList();
+    refreshCardListBox();
 }
 
-export function selectLast(){
-    const decks = document.querySelectorAll(".saved-deck"); 
-    if (decks.length > 0) 
-        { decks[decks.length - 1].click(); }
+export function selectLast(deck = true) {
+    if (deck) {
+        const decks = document.querySelectorAll(".saved-deck");
+        if (decks.length > 0) {
+            decks[decks.length - 1].click();
+        }
+        return;
+    }
+    const cards = document.querySelectorAll("#cardBox .saved-card");
+    if (cards.length > 0) {
+        cards[cards.length - 1].click();
+    }
 }
 
-function setCardListDisplay() {
-    const elements = document.querySelectorAll(".visibleWithActiveDeck");
+function setElementVisibility() {
+    const deckElements = document.querySelectorAll(".visibleWithActiveDeck");
+    const showDeckElements = currentDeckId !== null && currentCardList.length > 0;
+    deckElements.forEach(el => {
+        el.style.display = showDeckElements ? "" : "none";
+    });
 
-    const show = currentDeck !== null;
-
-    elements.forEach(el => {
-        el.style.display = show ? "" : "none";
+    const emptyDeckElements = document.querySelectorAll(".visibleWithEmptyDeck");
+    const showEmptyDeckElements = currentDeckId !== null;
+    emptyDeckElements.forEach(el => {
+        el.style.display = showEmptyDeckElements ? "" : "none";
     });
 }
 
-export function refreshSavedCardsBox() {
+export function refreshAllCardsBox() {
     const cardBox = document.getElementById("cardBox");
     cardBox.innerHTML = "";
 
     for (let key in localStorage) {
         if (key.startsWith("card_")) {
-            const name = key.replace("card_", "");
-
-            const cardDiv = createSavedCardElement(name);
+            const name = getCardData(key).name || "UNNAMED";
+            const cardDiv = createSavedCardElement(key, name);
             cardBox.appendChild(cardDiv);
         }
     }
 }
 
-function refreshCardList() {
+function refreshCardListBox() {
     const cardListBox = document.getElementById("cardListBox");
     cardListBox.innerHTML = "";
-    for (let cardName of currentCardList) {
-        const cardListDiv = createSavedCardElement(cardName);
+    for (let cardId of currentCardList) {
+        const data = getCardData(cardId);
+        if (!data) {
+            return;
+        }
+        const name = data.name || "UNNAMED";
+        const cardListDiv = createSavedCardElement(cardId, name);
         cardListBox.appendChild(cardListDiv);
     }
     drawDeckStats(currentCardList);
-    
-    const cards = document.querySelectorAll(".saved-card"); 
-    if (cards.length > 0) 
-        { cards[cards.length - 1].click(); }
+
 }
 
-function createSavedCardElement(name) {
+function createSavedCardElement(id, name) {
     const div = document.createElement("div");
     div.textContent = name;
     div.className = "saved-card";
-
+    div.dataset.id = id;
     div.addEventListener("click", () => {
-        loadCard(name);
-
-        // remove selection from all cards
-        document.querySelectorAll(".saved-card").forEach(el =>
-            el.classList.remove("selected")
-        );
-
-        // add selection to this one
+        loadCard(id);
+        deselectCards();
         div.classList.add("selected");
-        setSelected(name);
+        setSelected(id, false);
     });
 
     return div;
 }
-function deselectCardlistCards() {
-    document.querySelectorAll("#cardListBox .saved-card").forEach(el => {
+
+function deselectCards() {
+    document.querySelectorAll(".saved-card").forEach(el => {
         el.classList.remove("selected");
     });
 }
 
-function setSelected(name, isDeck = false) {
+function setSelected(id, isDeck = false) {
     const selector = isDeck
         ? "#deckBox .saved-deck"
         : "#cardBox .saved-card";
 
-    document.querySelectorAll(selector).forEach(card => {
-        card.classList.toggle("selected", card.textContent === name);
+    document.querySelectorAll(selector).forEach(el => {
+        el.classList.toggle("selected", el.dataset.id === id);
     });
 }
 
-
-function getCardData() {
+function formToCardData() {
     return {
+        id: currentCardId,
         style: document.getElementById("cardStyle").value,
         name: document.getElementById("cardName").value,
         class: document.getElementById("cardClass").value,
@@ -241,40 +267,55 @@ function getCardData() {
     };
 }
 
-export function saveCard() {
-    const data = getCardData();
-    const name = data.name.trim();
-    if (!name) return;
+export function newCard() {
+    resetAllInputs();
+    deselectCards();
+    currentCardId = `card_${crypto.randomUUID()}`
+}
 
-    localStorage.setItem(`card_${name}`, JSON.stringify(data));
-    refreshSavedCardsBox();
-    setSelected(name);
-    deselectCardlistCards();
-    if (!currentCardList.includes(name)) {
+export function copyCard() {
+    if (!currentCardId) return;
+    currentCardId = `card_${crypto.randomUUID()}`
+    document.getElementById("cardName").value += " copy";
+    saveCard();
+}
+
+export function saveCard() {
+    const data = formToCardData();
+    if (!data.id) return;
+    const add = !localStorage.getItem(data.id);
+    localStorage.setItem(data.id, JSON.stringify(data));
+    refreshAllCardsBox();
+    refreshCardListBox();
+    setSelected(data.id, false);
+    if (add) {
         addToDeck();
     }
 }
 
 export function deleteCard() {
-    const name = document.getElementById("cardName").value.trim();
-    if (!name) {
+    if (!currentCardId) {
         return;
     }
-    const key = `card_${name}`;
-    if (!localStorage.getItem(key)) {
+    if (!localStorage.getItem(currentCardId)) {
         return;
     }
-    localStorage.removeItem(key);
+    localStorage.removeItem(currentCardId);
     pruneMissingCards();
-    refreshSavedCardsBox();
-    refreshCardList();
+    refreshAllCardsBox();
+    refreshCardListBox();
 }
 
-export function loadCard(name) {
-    const json = localStorage.getItem(`card_${name}`);
+function getCardData(id) {
+    const json = localStorage.getItem(id);
     if (!json) return;
+    return JSON.parse(json);
+}
 
-    const data = JSON.parse(json);
+export function loadCard(id) {
+    const data = getCardData(id);
+
+    currentCardId = data.id;
     document.getElementById("cardStyle").value = data.style || "";
     document.getElementById("cardName").value = data.name || "";
     document.getElementById("cardClass").value = data.class || "";
@@ -292,16 +333,17 @@ export function loadCard(name) {
     loadFrame();
     updateVisibleInputs();
     drawCard();
+    return data.name;
 }
 
 export function exportDeckPNG() {
-    if (!currentDeck || !currentCardList || currentCardList.length === 0) return;
+    if (!currentDeckId || !currentCardList || currentCardList.length === 0) return;
     pruneMissingCards();
     exportDeckAsPNGs(currentCardList);
 }
 
 export function exportDeckZip() {
-    if (!currentDeck || !currentCardList || currentCardList.length === 0) return;
+    if (!currentDeckId || !currentCardList || currentCardList.length === 0) return;
     pruneMissingCards();
-    exportDeckAsZip(currentCardList);
+    exportDeckAsZip(currentCardList, getDeckData(currentDeckId).name);
 }

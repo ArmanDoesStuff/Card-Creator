@@ -49,9 +49,9 @@ export const layouts = {
 
   Colours: {
     rage: "#780422",
-    tech: "#6c92fa",
-    stoic: "#bb984d",
-    chem: "#90be23",
-    relic: "#2c3e50",
+    tech: "#2c6ab6",
+    stoic: "#937738",
+    chem: "#708d25",
+    relic: "#434660",
   }
 };

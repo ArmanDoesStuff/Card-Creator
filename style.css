@@ -131,7 +131,7 @@ button:active {
     --text: #000000;
     --row-odd: #c9c9c9;
     --row-even: #dfdfdf;
-    --row-selected: #9e9e9e;
+    --row-selected: #b2bcd3;
     --border-line: #444;
     --hover: #e2e2e2;
 }
@@ -141,7 +141,7 @@ button:active {
     --text: #eeeeee;
     --row-odd: #313131;
     --row-even: #464646;
-    --row-selected: #797979;
+    --row-selected: #585b7e;
     --border-line: #a7a7a7;
     --hover: #505050;
 }

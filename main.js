@@ -1,34 +1,59 @@
-import { drawCard, loadFrame } from "./drawCard.js";
-import { exportCurrentCardAsPNG } from "./export.js";
-import { updateVisibleInputs, resetAllInputs } from "./inputs.js";
-import { saveCard, deleteCard, refreshSavedCardsBox, createDeck, deleteDeck, deselectDeck, addToDeck, removeFromDeck, refreshDecksBox, exportDeckPNG, exportDeckZip, selectLast } from "./saveCard.js"
-import { clearAppStorage, exportCardsJson, importCardsJson, exportDeckJson,importDeckJson } from "./storage.js"
+import {drawCard, loadFrame} from "./drawCard.js";
+import {exportCurrentCardAsPNG} from "./export.js";
+import {updateVisibleInputs} from "./inputs.js";
+import {
+    saveCard,
+    deleteCard,
+    newCard,
+    refreshAllCardsBox,
+    createDeck,
+    deleteDeck,
+    deselectDeck,
+    addToDeck,
+    removeFromDeck,
+    refreshDecksBox,
+    exportDeckPNG,
+    exportDeckZip,
+    selectLast,
+    copyCard, renameDeck
+} from "./saveCard.js"
+import {clearAppStorage, exportCardsJson, importCardsJson, exportDeckJson, importDeckJson} from "./storage.js"
 
 
 // Add listeners
 const styleSelect = document.getElementById("cardStyle");
 styleSelect.addEventListener("change", () => {
-  loadFrame();
-  updateVisibleInputs();
+    loadFrame();
+    updateVisibleInputs();
 
 });
 const costIds = ["costRed", "costBlue", "costWhite", "costGreen", "costBlack"];
 costIds.forEach(id => {
-  const select = document.getElementById(id);
-  for (let i = 0; i <= 9; i++) {
-    const opt = document.createElement("option");
-    opt.value = i === 0 ? "" : String(i); opt.textContent = i;
-    select.appendChild(opt);
-  }
+    const select = document.getElementById(id);
+    for (let i = 0; i <= 9; i++) {
+        const opt = document.createElement("option");
+        opt.value = i === 0 ? "" : String(i);
+        opt.textContent = i;
+        select.appendChild(opt);
+    }
 });
-document.getElementById("saveCardBtn").addEventListener("click", saveCard);
+
+document.getElementById("newCardBtn").addEventListener("click", newCard);
+document.getElementById("copyCardBtn").addEventListener("click", copyCard);
 document.getElementById("deleteCardBtn").addEventListener("click", deleteCard);
-document.getElementById("clearCardBtn").addEventListener("click", resetAllInputs);
+
+
+const controls = document.getElementById("controls");
+controls.querySelectorAll("input, select, textarea").forEach(el => {
+    el.addEventListener("input", saveCard);
+    el.addEventListener("change", saveCard);
+});
 
 document.getElementById("addToDeckBtn").addEventListener("click", addToDeck);
 document.getElementById("removeFromDeckBtn").addEventListener("click", removeFromDeck);
 
 document.getElementById("createDeckBtn").addEventListener("click", createDeck);
+document.getElementById("renameDeckBtn").addEventListener("click", renameDeck);
 document.getElementById("deleteDeckBtn").addEventListener("click", deleteDeck);
 document.getElementById("deselectDeckBtn").addEventListener("click", deselectDeck);
 
@@ -47,10 +72,14 @@ document.getElementById("exportImageBtn").addEventListener("click", exportCurren
 document.getElementById("exportDeckPngBtn").addEventListener("click", exportDeckPNG);
 document.getElementById("exportDeckZipBtn").addEventListener("click", exportDeckZip);
 
+
 // Initial Load
 loadFrame();
 updateVisibleInputs();
-costIds.forEach(id => { document.getElementById(id).addEventListener("change", drawCard); });
-refreshSavedCardsBox();
+costIds.forEach(id => {
+    document.getElementById(id).addEventListener("change", drawCard);
+});
+refreshAllCardsBox();
 refreshDecksBox();
-selectLast();
+selectLast(true);
+selectLast(false);

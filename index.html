@@ -8,107 +8,110 @@
 </head>
 
 <body>
-    <div class="title-row">
-        <h1>Anaxis - Card Maker</h1>
-        <button id="themeToggle">Night Mode</button>
+<div class="title-row">
+    <h1>Anaxis - Card Maker</h1>
+    <button id="themeToggle">Night Mode</button>
+</div>
+<div id="layout">
+
+    <div class="column" id="preview">
+        <canvas id="card"></canvas>
     </div>
-    <div id="layout">
 
-        <div class="column" id="preview">
-            <canvas id="card"></canvas>
-        </div>
+    <div class="column" id="controls-wrapper">
+        <button id="newCardBtn">New card</button>
+        <br>
+        <label>
+            <select id="cardStyle">
+                <option>Leader</option>
+                <option>Backline</option>
+                <option>Creature</option>
+                <option>Structure</option>
+                <option>Augment</option>
+                <option>Stratagem</option>
+            </select>
+        </label>
 
-        <div class="column" id="controls-wrapper">
-            <label>
-                <select id="cardStyle">
-                    <option>Leader</option>
-                    <option>Backline</option>
-                    <option>Creature</option>
-                    <option>Structure</option>
-                    <option>Augment</option>
-                    <option>Stratagem</option>
-                </select>
-            </label>
-
-            <div id="controls">
-                <label data-types="Leader,Backline,Creature,Structure,Augment,Stratagem">Name: <input type="text" id="cardName"></label>
-                <div id="cost" class="cost-row" data-types="Leader,Creature,Structure,Augment,Stratagem">
-                    <label>Red: <select id="costRed"></select></label>
-                    <label>Blue: <select id="costBlue"></select></label>
-                    <label>White: <select id="costWhite"></select></label>
-                    <label>Green: <select id="costGreen"></select></label>
-                    <label>Black: <select id="costBlack"></select></label>
-                </div>
-                <label data-types="Leader,Creature,Structure">Class: <input type="text" id="cardClass"></label>
-                <label data-types="Leader,Backline,Creature,Structure,Augment,Stratagem">Description: <textarea id="cardDesc" rows="7"></textarea></label>
-                <label data-types="Leader,Backline,Creature,Structure,Augment,Stratagem">Lore: <textarea id="cardLore" rows="3"></textarea></label>
-                <div class="same-line">
-                    <label data-types="Leader,Creature">Attack: <input type="text" id="cardAttack"></label>
-                    <label data-types="Leader,Creature">Defence: <input type="text" id="cardDefence"></label>
-                </div>
+        <div id="controls">
+            <label data-types="Leader,Backline,Creature,Structure,Augment,Stratagem">Name:
+                <input type="text" id="cardName"></label>
+            <div id="cost" class="cost-row" data-types="Leader,Creature,Structure,Augment,Stratagem">
+                <label>Red: <select id="costRed"></select></label>
+                <label>Blue: <select id="costBlue"></select></label>
+                <label>White: <select id="costWhite"></select></label>
+                <label>Green: <select id="costGreen"></select></label>
+                <label>Black: <select id="costBlack"></select></label>
             </div>
-
-            <button id="saveCardBtn">Save card</button>
-            <button id="deleteCardBtn">Delete card</button>
-            <button id="clearCardBtn">Clear card</button>
-            <button id="exportImageBtn">Export PNG</button>
-        </div>
-
-        <div class="column" id="cardBox-wrapper">
-            <h3>All Cards</h3>
-            <div class="selectionBox" id="cardBox"></div>
-            <div class="visibleWithActiveDeck">
-                <button id="addToDeckBtn">Add to Deck</button>
-                <button id="removeFromDeckBtn">Remove from Deck</button>
-            </div>
-        </div>
-
-        <div class="column" id="deckBox-wrapper">
-            <label>Deck Name: <input type="text" id="deckName"></label>
+            <label data-types="Leader,Creature,Structure">Class: <input type="text" id="cardClass"></label>
+            <label data-types="Leader,Backline,Creature,Structure,Augment,Stratagem">Description: <textarea
+                    id="cardDesc" rows="7"></textarea></label>
+            <label data-types="Leader,Backline,Creature,Structure,Augment,Stratagem">Lore:
+                <textarea id="cardLore" rows="3"></textarea></label>
             <div class="same-line">
-                <button id="createDeckBtn">Create Deck</button>
-                <button class="visibleWithActiveDeck" id="deleteDeckBtn">Delete Deck</button>
-                <button id="deselectDeckBtn" class="visibleWithActiveDeck">Deselect Deck</button>
-            </div>
-            <h3>Deck List</h3>
-            <div class="selectionBox" id="deckBox"></div>
-            <div class="visibleWithActiveDeck">
-                <h3>Card List</h3>
-                <div class="selectionBox" id="cardListBox"></div>
-                <button id="exportDeckPngBtn">Export Deck PNGs</button>
-                <button id="exportDeckZipBtn">Export Deck Zip</button>
+                <label data-types="Leader,Creature">Attack: <input type="text" id="cardAttack"></label>
+                <label data-types="Leader,Creature">Defence: <input type="text" id="cardDefence"></label>
             </div>
         </div>
-        <div class="column visibleWithActiveDeck" id="deckStats-wrapper">
-            <h1>Deck Stats</h1>
-            <h2>Card Counts</h2>
-            <div id="cardCounts"></div>
-            <h2>Cost Distribution</h2>
-            <canvas id="deckStatsCanvas"></canvas>
-            <h2>Style Distribution</h2>
-            <canvas id="styleStatsCanvas"></canvas>
-            <h2>Colour Distribution</h2>
-            <div id="colourBarWrapper">
-                <div id="colourBar"></div>
-            </div>
-        </div>
-        <div class="column" id="storage-wrapper">
-            <button id="exportCardsJsonBtn">Export Cards JSON</button>
-            <button id="importCardsJsonBtn">Import Cards JSON</button>
-            <br>
-            <button id="exportDeckJsonBtn" class="visibleWithActiveDeck">Export Deck JSON</button>
-            <button id="importDeckJsonBtn">Import Deck JSON</button>
-            <br>
-            <textarea id="storageTextBox" rows="15"></textarea>
-            <br>
-            <button id="clearStorageBtn">Clear Storage</button>
-        </div>
+
+        <button id="deleteCardBtn">Delete card</button>
+        <button id="copyCardBtn">Copy card</button>
+        <button id="exportImageBtn">Export PNG</button>
     </div>
 
-    <script type="module" src="main.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
-    <script type="module" src="./night.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <div class="column" id="cardBox-wrapper">
+        <h3>All Cards</h3>
+        <div class="selectionBox" id="cardBox"></div>
+        <button id="addToDeckBtn" class="visibleWithEmptyDeck">Add to Deck</button>
+        <button id="removeFromDeckBtn" class="visibleWithActiveDeck">Remove from Deck</button>
+    </div>
+
+    <div class="column" id="deckBox-wrapper">
+        <label>Deck Name: <input type="text" id="deckName"></label>
+        <div class="same-line">
+            <button id="createDeckBtn">Create Deck</button>
+            <button id="renameDeckBtn" class="visibleWithEmptyDeck">Rename Deck</button>
+        </div>
+        <h3>Deck List</h3>
+        <div class="selectionBox" id="deckBox"></div>
+        <button class="visibleWithEmptyDeck" id="deleteDeckBtn">Delete Deck</button>
+        <button id="deselectDeckBtn" class="visibleWithActiveDeck">Deselect Deck</button>
+        <div class="visibleWithActiveDeck">
+            <h3>Card List</h3>
+            <div class="selectionBox" id="cardListBox"></div>
+            <button id="exportDeckPngBtn">Export Deck PNGs</button>
+            <button id="exportDeckZipBtn">Export Deck Zip</button>
+        </div>
+    </div>
+    <div class="column visibleWithActiveDeck" id="deckStats-wrapper">
+        <h1>Deck Stats</h1>
+        <h2>Card Counts</h2>
+        <div id="cardCounts"></div>
+        <h2>Cost Distribution</h2>
+        <canvas id="deckStatsCanvas"></canvas>
+        <h2>Style Distribution</h2>
+        <canvas id="styleStatsCanvas"></canvas>
+        <h2>Colour Distribution</h2>
+        <div id="colourBarWrapper">
+            <div id="colourBar"></div>
+        </div>
+    </div>
+    <div class="column" id="storage-wrapper">
+        <button id="exportCardsJsonBtn">Export Cards JSON</button>
+        <button id="importCardsJsonBtn">Import Cards JSON</button>
+        <br>
+        <button id="exportDeckJsonBtn" class="visibleWithActiveDeck">Export Deck JSON</button>
+        <button id="importDeckJsonBtn">Import Deck JSON</button>
+        <br>
+        <textarea id="storageTextBox" rows="15"></textarea>
+        <br>
+        <button id="clearStorageBtn">Clear Storage</button>
+    </div>
+</div>
+
+<script type="module" src="main.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<script type="module" src="./night.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </body>
 
 </html>

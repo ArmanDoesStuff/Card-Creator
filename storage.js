@@ -1,4 +1,4 @@
-import { refreshSavedCardsBox, refreshDecksBox, currentDeck, setCurrentDeck, setCurrentCardList } from "./saveCard.js";
+import {refreshAllCardsBox, refreshDecksBox, setCurrentDeck, setCurrentCardList, currentDeckId} from "./saveCard.js";
 
 export function clearAppStorage() {
     for (let key in localStorage) {
@@ -21,7 +21,7 @@ export function exportCardsJson() {
         }
     }
 
-    document.getElementById("storageTextBox").value = JSON.stringify(cards, null, 2); 
+    document.getElementById("storageTextBox").value = JSON.stringify(cards, null, 2);
 }
 
 export function importCardsJson() {
@@ -42,22 +42,24 @@ export function importCardsJson() {
         return;
     }
 
-    // Save each card using your existing naming scheme
+    // Save each card using naming scheme
     for (const card of cards) {
-        if (!card.name) continue; // skip invalid entries
-        const key = `card_${card.name.trim()}`;
-        localStorage.setItem(key, JSON.stringify(card));
+        //temp
+        if (!card.id) {
+            card.id = `card_${crypto.randomUUID()}`
+        }
+
+        localStorage.setItem(card.id, JSON.stringify(card));
     }
 
     // Refresh UI
-    refreshSavedCardsBox();
+    refreshAllCardsBox();
 }
 
 export function exportDeckJson() {
-    if (!currentDeck) return;
+    if (!currentDeckId) return;
 
-    const key = `deck_${currentDeck}`;
-    const data = JSON.parse(localStorage.getItem(key));
+    const data = JSON.parse(localStorage.getItem(currentDeckId));
 
     document.getElementById("storageTextBox").value =
         JSON.stringify(data, null, 2);
@@ -80,12 +82,16 @@ export function importDeckJson() {
         return;
     }
 
+    if (!data.id) {
+        data.id = `deck_${crypto.randomUUID()}`;
+    }
+
     // Update memory
-    setCurrentDeck(data.name);
+    setCurrentDeck(data.id);
     setCurrentCardList(data.currentDeckList);
 
     // Save to storage
-    localStorage.setItem(`deck_${data.name}`, JSON.stringify(data));
+    localStorage.setItem(data.id, JSON.stringify(data));
 
     refreshDecksBox();
 }
