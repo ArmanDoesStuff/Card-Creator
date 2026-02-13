@@ -2,6 +2,7 @@ import {resetAllInputs, updateVisibleInputs} from "./inputs.js";
 import {drawCard, loadFrame} from "./drawCard.js";
 import {exportDeckAsPNGs, exportDeckAsZip} from "./export.js";
 import {drawDeckStats} from "./deckStats.js";
+import {layouts} from "./layouts.js";
 
 let currentCardId = null;
 export let currentDeckId = null;
@@ -195,7 +196,7 @@ export function refreshAllCardsBox() {
     for (let key in localStorage) {
         if (key.startsWith("card_")) {
             const name = getCardData(key).name || "UNNAMED";
-            const cardDiv = createSavedCardElement(key, name);
+            const cardDiv = createSavedCardElement(getCardData(key), name);
             cardBox.appendChild(cardDiv);
         }
     }
@@ -210,21 +211,46 @@ function refreshCardListBox() {
             return;
         }
         const name = data.name || "UNNAMED";
-        const cardListDiv = createSavedCardElement(cardId, name);
+        const cardListDiv = createSavedCardElement(data, name);
         cardListBox.appendChild(cardListDiv);
     }
     drawDeckStats(currentCardList);
 }
 
-function createSavedCardElement(id, name) {
+function createSavedCardElement(data, name) {
     const div = document.createElement("div");
-    div.textContent = name;
     div.className = "saved-card";
-    div.dataset.id = id;
+    div.dataset.id = data.id;
+
+    // Name on the left
+    const label = document.createElement("span");
+    label.textContent = name;
+    div.appendChild(label);
+
+    // Right-side strip container
+    const container = document.createElement("div");
+    container.className = "strip-container";
+    div.appendChild(container);
+
+    console.log("data.cost =", data.cost);
+    // Determine active colours from cost
+    const activeColours = Object.entries(data.cost)
+        .filter(([key, value]) => value > 0)
+        .map(([key]) => layouts.Colours[key]);
+
+    console.log(activeColours)
+    // Add one strip per active colour
+    activeColours.forEach(col => {
+        const strip = document.createElement("div");
+        strip.className = "colour-strip";
+        strip.style.background = col;
+        container.appendChild(strip);
+    });
+
     div.addEventListener("click", () => {
-        loadCard(id);
+        loadCard(data.id);
         deselectCards();
-        setSelected(id, ".saved-card");
+        setSelected(data.id, ".saved-card");
     });
 
     return div;

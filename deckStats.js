@@ -1,5 +1,4 @@
 import {layouts} from "./layouts.js";
-import {currentDeckId} from "./saveCard.js";
 
 export function drawDeckStats(cardList) {
     // Card counts
