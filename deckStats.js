@@ -49,7 +49,7 @@ function renderDeckDetails(stats) {
 
     div.innerHTML = `
         <div>Leader: ${stats.leaderCount}/1</div>
-        <div>Regulars: ${stats.otherCount}/30</div>
+        <div>Regulars: ${stats.otherCount}/50</div>
         <div>Backlines: ${stats.backlineCount}/9</div>
     `;
 }

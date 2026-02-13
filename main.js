@@ -45,8 +45,7 @@ document.getElementById("deleteCardBtn").addEventListener("click", deleteCard);
 
 const controls = document.getElementById("controls");
 controls.querySelectorAll("input, select, textarea").forEach(el => {
-    el.addEventListener("input", saveCard);
-    el.addEventListener("change", saveCard);
+    el.addEventListener("blur", saveCard);
 });
 
 document.getElementById("addToDeckBtn").addEventListener("click", addToDeck);

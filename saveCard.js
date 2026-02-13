@@ -21,11 +21,11 @@ export function addToDeck() {
     overwriteDeck();
     refreshCardListBox();
     setElementVisibility();
+    setSelected(currentCardId, ".saved-card");
 }
 
 export function removeFromDeck() {
     if (!currentCardId || !currentDeckId) return;
-
     const index = currentCardList.indexOf(currentCardId);
     if (index !== -1) {
         currentCardList.splice(index, 1);
@@ -33,6 +33,7 @@ export function removeFromDeck() {
     overwriteDeck();
     refreshCardListBox();
     setElementVisibility();
+    setSelected(currentCardId, ".saved-card");
 }
 
 export function createDeck() {
@@ -45,7 +46,7 @@ export function createDeck() {
     saveDeck(deckName);
     refreshDecksBox();
     document.getElementById("deckName").value = "";
-    setSelected(currentDeckId, true);
+    setSelected(currentDeckId, "#deckBox .saved-deck");
 }
 
 function saveDeck(deckName) {
@@ -64,7 +65,7 @@ export function renameDeck() {
     const name = document.getElementById("deckName").value;
     saveDeck(name);
     refreshDecksBox();
-    setSelected(currentDeckId, true)
+    setSelected(currentDeckId, "#deckBox .saved-deck")
 }
 
 function overwriteDeck() {
@@ -213,7 +214,6 @@ function refreshCardListBox() {
         cardListBox.appendChild(cardListDiv);
     }
     drawDeckStats(currentCardList);
-
 }
 
 function createSavedCardElement(id, name) {
@@ -224,8 +224,7 @@ function createSavedCardElement(id, name) {
     div.addEventListener("click", () => {
         loadCard(id);
         deselectCards();
-        div.classList.add("selected");
-        setSelected(id, false);
+        setSelected(id, ".saved-card");
     });
 
     return div;
@@ -237,11 +236,7 @@ function deselectCards() {
     });
 }
 
-function setSelected(id, isDeck = false) {
-    const selector = isDeck
-        ? "#deckBox .saved-deck"
-        : "#cardBox .saved-card";
-
+function setSelected(id, selector) {
     document.querySelectorAll(selector).forEach(el => {
         el.classList.toggle("selected", el.dataset.id === id);
     });
@@ -287,7 +282,7 @@ export function saveCard() {
     localStorage.setItem(data.id, JSON.stringify(data));
     refreshAllCardsBox();
     refreshCardListBox();
-    setSelected(data.id, false);
+    setSelected(data.id, ".saved-card");
     if (add) {
         addToDeck();
     }

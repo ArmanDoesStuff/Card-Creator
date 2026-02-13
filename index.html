@@ -42,6 +42,7 @@
                 <label>Green: <select id="costGreen"></select></label>
                 <label>Black: <select id="costBlack"></select></label>
             </div>
+            <div class="total-cost">Total: </div>
             <label data-types="Leader,Creature,Structure">Class: <input type="text" id="cardClass"></label>
             <label data-types="Leader,Backline,Creature,Structure,Augment,Stratagem">Description: <textarea
                     id="cardDesc" rows="7"></textarea></label>
@@ -62,7 +63,6 @@
         <h3>All Cards</h3>
         <div class="selectionBox" id="cardBox"></div>
         <button id="addToDeckBtn" class="visibleWithEmptyDeck">Add to Deck</button>
-        <button id="removeFromDeckBtn" class="visibleWithActiveDeck">Remove from Deck</button>
     </div>
 
     <div class="column" id="deckBox-wrapper">
@@ -78,6 +78,8 @@
         <div class="visibleWithActiveDeck">
             <h3>Card List</h3>
             <div class="selectionBox" id="cardListBox"></div>
+            <button id="removeFromDeckBtn" class="visibleWithActiveDeck">Remove from Deck</button>
+            <br>
             <button id="exportDeckPngBtn">Export Deck PNGs</button>
             <button id="exportDeckZipBtn">Export Deck Zip</button>
         </div>
