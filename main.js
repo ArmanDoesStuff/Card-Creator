@@ -27,7 +27,7 @@ styleSelect.addEventListener("change", () => {
     updateVisibleInputs();
 
 });
-const costIds = ["costRed", "costBlue", "costWhite", "costGreen", "costBlack"];
+const costIds = ["costAsh", "costTech", "costStoic", "costChem", "costRelic"];
 costIds.forEach(id => {
     const select = document.getElementById(id);
     for (let i = 0; i <= 9; i++) {

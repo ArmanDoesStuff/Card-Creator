@@ -55,7 +55,7 @@ button:active {
 /* Deck Details column */
 .cost-bar {
     background: #4a90e2;
-    color: white;
+    color: #ffffff;
     padding: 4px;
     margin: 3px 0;
 }
@@ -80,10 +80,6 @@ button:active {
 
 /* Selection Box */
 
-.selected {
-    font-weight: bold;
-}
-
 .selectionBox>div:nth-child(odd) {
     background: var(--row-odd);
 }
@@ -94,49 +90,81 @@ button:active {
 
 .selectionBox > div.selected {
     background: var(--row-selected);
+    font-weight: bold;
+}
+
+.selectionBox > div.saved-title {
+    background:var(--row-title);
+    font-size: 18px;
+    font-weight: bold;
 }
 
 .selectionBox>div:first-child {
     margin-top: 10px;
 }
 
-.selectionBox>div {
-    padding: 8px;
-    border-radius: 4px;
-    margin-left: 15px;
-    margin-right: 15px;
-    margin-bottom: 6px;
+/* if you want to keep separate paddings */
+.selectionBox > div {
+    box-sizing: border-box;
     width: 300px;
-    cursor: pointer;
 }
 
 .selectionBox {
     margin-bottom: 15px;
 }
 
+.saved-deck, .saved-title{
+    padding: 8px 8px 8px 8px;
+}
+
 .saved-card {
     position: relative;
-    padding: 4px 8px;
+    padding: 8px 8px 8px 40px;
     min-height: 24px;
     display: flex;
     align-items: center;
 }
 
-/* Container that sticks to the right and fills height */
+.selectionBox > .row,
+.selectionBox > div {
+    margin-bottom: 6px; /* or 8–12px for more breathing room */
+}
+
+.saved-card .content {
+    padding-left: 36px;
+}
+
 .saved-card .strip-container {
     position: absolute;
     top: 0;
     bottom: 0;
     right: 0;
     display: flex;
-    flex-direction: row-reverse; /* rightmost strip first */
+    flex-direction: row-reverse;
 }
 
-/* Individual strips */
 .saved-card .colour-strip {
     width: 8px;
     border-radius: 2px;
-    margin-left: 2px; /* small gap between strips */
+}
+
+.saved-card .left-strip {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+
+    width: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--text);
+
+    background: var(--row-cost);
+    border-radius: 2px;
 }
 
 /* Other */
@@ -158,6 +186,8 @@ button:active {
     --row-odd: #c9c9c9;
     --row-even: #dfdfdf;
     --row-selected: #b2bcd3;
+    --row-title: #d4cde3;
+    --row-cost: rgba(212, 205, 226, 0.6);
     --border-line: #444;
     --hover: #e2e2e2;
 }
@@ -168,6 +198,8 @@ button:active {
     --row-odd: #313131;
     --row-even: #464646;
     --row-selected: #585b7e;
+    --row-title: #4d407a;
+    --row-cost: rgba(77, 64, 123, 0.6);
     --border-line: #a7a7a7;
     --hover: #505050;
 }

@@ -34,11 +34,11 @@ export function drawCard() {
     const atk = document.getElementById("cardAttack").value;
     const def = document.getElementById("cardDefence").value;
     const costs = [
-        {value: document.getElementById("costRed").value, color: layouts.Colours.rage},
-        {value: document.getElementById("costBlue").value, color: layouts.Colours.tech},
-        {value: document.getElementById("costWhite").value, color: layouts.Colours.stoic},
-        {value: document.getElementById("costGreen").value, color: layouts.Colours.chem},
-        {value: document.getElementById("costBlack").value, color: layouts.Colours.relic}
+        {value: document.getElementById("costAsh").value, color: layouts.Colours.ash},
+        {value: document.getElementById("costTech").value, color: layouts.Colours.tech},
+        {value: document.getElementById("costStoic").value, color: layouts.Colours.stoic},
+        {value: document.getElementById("costChem").value, color: layouts.Colours.chem},
+        {value: document.getElementById("costRelic").value, color: layouts.Colours.relic}
     ].filter(c => c.value); // keep only non‑zero ones
 
     // COST
@@ -66,7 +66,7 @@ export function drawCard() {
     totalCostEl.textContent = `Total: ${total}`;
 
     // Set colour
-    ctx.fillStyle = "black";
+    ctx.fillStyle = "#000";
 
     // NAME
     if (L.name && name) {

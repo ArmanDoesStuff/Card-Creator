@@ -65,11 +65,11 @@ function computeCostStats(cardList) {
         if (!card || !card.cost) continue;
 
         const totalCost =
-            (parseInt(card.cost.red) || 0) +
-            (parseInt(card.cost.blue) || 0) +
-            (parseInt(card.cost.white) || 0) +
-            (parseInt(card.cost.green) || 0) +
-            (parseInt(card.cost.black) || 0);
+            (parseInt(card.cost.ash) || 0) +
+            (parseInt(card.cost.tech) || 0) +
+            (parseInt(card.cost.stoic) || 0) +
+            (parseInt(card.cost.chem) || 0) +
+            (parseInt(card.cost.relic) || 0);
 
         costCounts[totalCost] = (costCounts[totalCost] || 0) + 1;
 
@@ -94,7 +94,7 @@ function renderCostGraph(costCounts) {
     const labels = Object.keys(costCounts);
     const values = Object.values(costCounts);
 
-    if (deckChart) deckChart.destroy(); // clean redraw
+    if (deckChart) deckChart.destroy(); // clean ashraw
 
     deckChart = new Chart(ctx, {
         type: "bar",
@@ -163,7 +163,7 @@ function renderStyleGraph(styleStats) {
                 label: "Card Styles",
                 data: values,
                 backgroundColor: [
-                    layouts.Colours.rage, // Creature
+                    layouts.Colours.ash, // Creature
                     layouts.Colours.stoic, // Structure
                     layouts.Colours.chem, // Augment
                     layouts.Colours.tech  // Stratagem
@@ -192,7 +192,7 @@ function renderStyleGraph(styleStats) {
 //Colour Bar
 
 function computeColourStats(cardList) {
-    const totals = {red: 0, blue: 0, white: 0, green: 0, black: 0};
+    const totals = {ash: 0, tech: 0, stoic: 0, chem: 0, relic: 0};
 
     for (const cardId of cardList) {
         const card = loadCard(cardId);
@@ -222,11 +222,11 @@ function renderColourBar(percentages) {
     bar.innerHTML = "";
 
     const colours = {
-        red: layouts.Colours.rage,
-        blue: layouts.Colours.tech,
-        white: layouts.Colours.stoic,
-        green: layouts.Colours.chem,
-        black: layouts.Colours.relic
+        ash: layouts.Colours.ash,
+        tech: layouts.Colours.tech,
+        stoic: layouts.Colours.stoic,
+        chem: layouts.Colours.chem,
+        relic: layouts.Colours.relic
     };
 
     for (const colour in percentages) {

@@ -20,7 +20,7 @@ export function addToDeck() {
     if (!currentCardId || !currentDeckId) return;
     currentCardList.push(currentCardId);
     overwriteDeck();
-    refreshCardListBox();
+    refreshCardListsBox();
     setElementVisibility();
     setSelected(currentCardId, ".saved-card");
 }
@@ -32,7 +32,7 @@ export function removeFromDeck() {
         currentCardList.splice(index, 1);
     }
     overwriteDeck();
-    refreshCardListBox();
+    refreshCardListsBox();
     setElementVisibility();
     setSelected(currentCardId, ".saved-card");
 }
@@ -109,7 +109,7 @@ function loadDeck(deckID) {
     currentCardList = deck.currentDeckList || [];  // array of strings
     pruneMissingCards();
     setElementVisibility();
-    refreshCardListBox();
+    refreshCardListsBox();
 }
 
 function getAllCardIds() {
@@ -141,7 +141,6 @@ export function refreshDecksBox() {
             const div = document.createElement("div");
             div.textContent = deckData.name;
             div.className = "saved-deck";
-            console.log(deckData.name);
             div.addEventListener("click", () => {
                 loadDeck(id);
 
@@ -158,7 +157,7 @@ export function refreshDecksBox() {
             div.dataset.id = id;
         }
     }
-    refreshCardListBox();
+    refreshCardListsBox();
 }
 
 export function selectLast(deck = true) {
@@ -189,35 +188,43 @@ function setElementVisibility() {
     });
 }
 
+function refreshCardListsBox() {
+    const cardDataGroups = getCardsData(currentCardList);
+    refreshCardBox(cardDataGroups, "cardListBox")
+    drawDeckStats(currentCardList);
+}
+
 export function refreshAllCardsBox() {
-    const cardBox = document.getElementById("cardBox");
+    const cardDataGroups = getCardsData(Object.keys(localStorage));
+    refreshCardBox(cardDataGroups, "cardBox");
+}
+
+function refreshCardBox(cardDataGroups, boxName) {
+    const cardBox = document.getElementById(boxName);
     cardBox.innerHTML = "";
 
-    for (let key in localStorage) {
-        if (key.startsWith("card_")) {
-            const name = getCardData(key).name || "UNNAMED";
-            const cardDiv = createSavedCardElement(getCardData(key), name);
+
+    // Loop through each style group
+    for (const [style, cards] of Object.entries(cardDataGroups)) {
+
+        // --- Style header ---
+        const header = document.createElement("div");
+        header.className = "saved-title";
+        header.textContent = style;
+        cardBox.appendChild(header);
+
+        // --- Cards under this style ---
+        for (const data of cards) {
+            const totalCost = Object.values(data.cost).reduce((sum, v) => sum + Number(v), 0);
+            const name = data.name || "UNNAMED";
+            const cardDiv = createSavedCardElement(data, name, totalCost);
             cardBox.appendChild(cardDiv);
         }
     }
 }
 
-function refreshCardListBox() {
-    const cardListBox = document.getElementById("cardListBox");
-    cardListBox.innerHTML = "";
-    for (let cardId of currentCardList) {
-        const data = getCardData(cardId);
-        if (!data) {
-            return;
-        }
-        const name = data.name || "UNNAMED";
-        const cardListDiv = createSavedCardElement(data, name);
-        cardListBox.appendChild(cardListDiv);
-    }
-    drawDeckStats(currentCardList);
-}
 
-function createSavedCardElement(data, name) {
+function createSavedCardElement(data, name, totalCost) {
     const div = document.createElement("div");
     div.className = "saved-card";
     div.dataset.id = data.id;
@@ -227,18 +234,31 @@ function createSavedCardElement(data, name) {
     label.textContent = name;
     div.appendChild(label);
 
+    // Left-side single-number strip
+    const leftStrip = document.createElement("div");
+    leftStrip.className = "left-strip";
+    leftStrip.textContent = totalCost;   // or whatever number you want
+    div.appendChild(leftStrip);
+
     // Right-side strip container
     const container = document.createElement("div");
     container.className = "strip-container";
     div.appendChild(container);
 
-    console.log("data.cost =", data.cost);
     // Determine active colours from cost
-    const activeColours = Object.entries(data.cost)
-        .filter(([key, value]) => value > 0)
+    let activeColours = Object.entries(data.cost)
+        .filter(([key, value]) => Number(value) > 0);
+
+    // If more than one colour, remove relic
+    if (activeColours.length > 1) {
+        activeColours = activeColours.filter(([key]) => key !== "relic");
+    }
+
+    // Sort strips by cost
+    activeColours = activeColours
+        .sort((a, b) => Number(b[1]) - Number(a[1]))
         .map(([key]) => layouts.Colours[key]);
 
-    console.log(activeColours)
     // Add one strip per active colour
     activeColours.forEach(col => {
         const strip = document.createElement("div");
@@ -279,11 +299,11 @@ function formToCardData() {
         attack: document.getElementById("cardAttack").value,
         defence: document.getElementById("cardDefence").value,
         cost: {
-            red: document.getElementById("costRed").value,
-            blue: document.getElementById("costBlue").value,
-            white: document.getElementById("costWhite").value,
-            green: document.getElementById("costGreen").value,
-            black: document.getElementById("costBlack").value
+            ash: document.getElementById("costAsh").value,
+            tech: document.getElementById("costTech").value,
+            stoic: document.getElementById("costStoic").value,
+            chem: document.getElementById("costChem").value,
+            relic: document.getElementById("costRelic").value
         }
     };
 }
@@ -307,7 +327,7 @@ export function saveCard() {
     const add = !localStorage.getItem(data.id);
     localStorage.setItem(data.id, JSON.stringify(data));
     refreshAllCardsBox();
-    refreshCardListBox();
+    refreshCardListsBox();
     setSelected(data.id, ".saved-card");
     if (add) {
         addToDeck();
@@ -324,13 +344,57 @@ export function deleteCard() {
     localStorage.removeItem(currentCardId);
     pruneMissingCards();
     refreshAllCardsBox();
-    refreshCardListBox();
+    refreshCardListsBox();
 }
 
 function getCardData(id) {
     const json = localStorage.getItem(id);
     if (!json) return;
     return JSON.parse(json);
+}
+
+const STYLE_ORDER = [
+    "Leader",
+    "Creature",
+    "Structure",
+    "Augment",
+    "Stratagem",
+    "Backline"
+];
+
+function getCardsData(ids) {
+    // Filter only card IDs
+    const filtered = ids.filter(id => id.startsWith("card_"));
+
+    // Load + parse card data
+    const data = filtered
+        .map(id => localStorage.getItem(id))
+        .filter(json => json)
+        .map(json => JSON.parse(json));
+
+    // Sort by total cost
+    data.sort((b, a) => {
+        const sumA = Object.values(a.cost).reduce((n, v) => n + Number(v), 0);
+        const sumB = Object.values(b.cost).reduce((n, v) => n + Number(v), 0);
+        return sumB - sumA;
+    });
+
+    // Group by style
+    const grouped = {};
+    for (const card of data) {
+        if (!grouped[card.style]) grouped[card.style] = [];
+        grouped[card.style].push(card);
+    }
+
+    // Return groups in the same order as STYLE_ORDER
+    const ordered = {};
+    for (const style of STYLE_ORDER) {
+        if (grouped[style]) {
+            ordered[style] = grouped[style];
+        }
+    }
+
+    return ordered;
 }
 
 export function loadCard(id) {
@@ -345,11 +409,11 @@ export function loadCard(id) {
     document.getElementById("cardAttack").value = data.attack || "";
     document.getElementById("cardDefence").value = data.defence || "";
 
-    document.getElementById("costRed").value = data.cost?.red || "";
-    document.getElementById("costBlue").value = data.cost?.blue || "";
-    document.getElementById("costWhite").value = data.cost?.white || "";
-    document.getElementById("costGreen").value = data.cost?.green || "";
-    document.getElementById("costBlack").value = data.cost?.black || "";
+    document.getElementById("costAsh").value = data.cost?.ash || "";
+    document.getElementById("costTech").value = data.cost?.tech || "";
+    document.getElementById("costStoic").value = data.cost?.stoic || "";
+    document.getElementById("costChem").value = data.cost?.chem || "";
+    document.getElementById("costRelic").value = data.cost?.relic || "";
 
     loadFrame();
     updateVisibleInputs();
