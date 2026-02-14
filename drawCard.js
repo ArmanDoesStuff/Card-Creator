@@ -33,6 +33,7 @@ export function drawCard() {
     const lore = document.getElementById("cardLore").value;
     const atk = document.getElementById("cardAttack").value;
     const def = document.getElementById("cardDefence").value;
+    const levelCost = document.getElementById("levelCost").value;
     const costs = [
         {value: document.getElementById("costAsh").value, color: layouts.Colours.ash},
         {value: document.getElementById("costTech").value, color: layouts.Colours.tech},
@@ -73,6 +74,15 @@ export function drawCard() {
         ctx.font = "bold 28px Arial";
         ctx.textAlign = ["Leader", "Backline"].includes(style) ? "center" : "left";
         ctx.fillText(name, L.name.x, L.name.y);
+    }
+
+    // LEVEL COST
+    if (L.levelCost && levelCost) {
+        ctx.font = "bold 22px Arial";
+        ctx.fillStyle = layouts.Colours.relic;
+        ctx.textAlign = "centre";
+        ctx.fillText(levelCost, L.levelCost.x, L.levelCost.y);
+        ctx.fillStyle = "#000";
     }
 
     // CLASS

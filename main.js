@@ -27,7 +27,7 @@ styleSelect.addEventListener("change", () => {
     updateVisibleInputs();
 
 });
-const costIds = ["costAsh", "costTech", "costStoic", "costChem", "costRelic"];
+const costIds = ["costAsh", "costTech", "costStoic", "costChem", "costRelic", "levelCost"];
 costIds.forEach(id => {
     const select = document.getElementById(id);
     for (let i = 0; i <= 9; i++) {
@@ -47,6 +47,8 @@ const controls = document.getElementById("controls");
 controls.querySelectorAll("input, select, textarea").forEach(el => {
     el.addEventListener("blur", saveCard);
 });
+const styleControl = document.getElementById("cardStyle");
+styleControl.addEventListener("change", saveCard);
 
 document.getElementById("addToDeckBtn").addEventListener("click", addToDeck);
 document.getElementById("removeFromDeckBtn").addEventListener("click", removeFromDeck);

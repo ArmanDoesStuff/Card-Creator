@@ -1,6 +1,7 @@
 export const layouts = {
   Leader: {
     name: { x: 223, y: 50 },
+    levelCost: { x: 376, y: 90 },
     cost: { x: 226, y: 74 },
     class: { x: 46, y: 342 },
     desc: { x: 40, y: 410, w: 360, h: 120, s: 20 },

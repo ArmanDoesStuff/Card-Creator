@@ -234,38 +234,41 @@ function createSavedCardElement(data, name, totalCost) {
     label.textContent = name;
     div.appendChild(label);
 
-    // Left-side single-number strip
-    const leftStrip = document.createElement("div");
-    leftStrip.className = "left-strip";
-    leftStrip.textContent = totalCost;   // or whatever number you want
-    div.appendChild(leftStrip);
+    if (data.style !== "Backline") {
 
-    // Right-side strip container
-    const container = document.createElement("div");
-    container.className = "strip-container";
-    div.appendChild(container);
+        // Left-side single-number strip
+        const leftStrip = document.createElement("div");
+        leftStrip.className = "left-strip";
+        leftStrip.textContent = totalCost;   // or whatever number you want
+        div.appendChild(leftStrip);
 
-    // Determine active colours from cost
-    let activeColours = Object.entries(data.cost)
-        .filter(([key, value]) => Number(value) > 0);
+        // Right-side strip container
+        const container = document.createElement("div");
+        container.className = "strip-container";
+        div.appendChild(container);
 
-    // If more than one colour, remove relic
-    if (activeColours.length > 1) {
-        activeColours = activeColours.filter(([key]) => key !== "relic");
+        // Determine active colours from cost
+        let activeColours = Object.entries(data.cost)
+            .filter(([key, value]) => Number(value) > 0);
+
+        // If more than one colour, remove relic
+        if (activeColours.length > 1) {
+            activeColours = activeColours.filter(([key]) => key !== "relic");
+        }
+
+        // Sort strips by cost
+        activeColours = activeColours
+            .sort((a, b) => Number(b[1]) - Number(a[1]))
+            .map(([key]) => layouts.Colours[key]);
+
+        // Add one strip per active colour
+        activeColours.forEach(col => {
+            const strip = document.createElement("div");
+            strip.className = "colour-strip";
+            strip.style.background = col;
+            container.appendChild(strip);
+        });
     }
-
-    // Sort strips by cost
-    activeColours = activeColours
-        .sort((a, b) => Number(b[1]) - Number(a[1]))
-        .map(([key]) => layouts.Colours[key]);
-
-    // Add one strip per active colour
-    activeColours.forEach(col => {
-        const strip = document.createElement("div");
-        strip.className = "colour-strip";
-        strip.style.background = col;
-        container.appendChild(strip);
-    });
 
     div.addEventListener("click", () => {
         loadCard(data.id);
@@ -286,26 +289,6 @@ function setSelected(id, selector) {
     document.querySelectorAll(selector).forEach(el => {
         el.classList.toggle("selected", el.dataset.id === id);
     });
-}
-
-function formToCardData() {
-    return {
-        id: currentCardId,
-        style: document.getElementById("cardStyle").value,
-        name: document.getElementById("cardName").value,
-        class: document.getElementById("cardClass").value,
-        desc: document.getElementById("cardDesc").value,
-        lore: document.getElementById("cardLore").value,
-        attack: document.getElementById("cardAttack").value,
-        defence: document.getElementById("cardDefence").value,
-        cost: {
-            ash: document.getElementById("costAsh").value,
-            tech: document.getElementById("costTech").value,
-            stoic: document.getElementById("costStoic").value,
-            chem: document.getElementById("costChem").value,
-            relic: document.getElementById("costRelic").value
-        }
-    };
 }
 
 export function newCard() {
@@ -376,7 +359,13 @@ function getCardsData(ids) {
     data.sort((b, a) => {
         const sumA = Object.values(a.cost).reduce((n, v) => n + Number(v), 0);
         const sumB = Object.values(b.cost).reduce((n, v) => n + Number(v), 0);
-        return sumB - sumA;
+
+        // Primary: total cost (descending)
+        const diff = sumB - sumA;
+        if (diff !== 0) return diff;
+
+        // Secondary: name (ascending)
+        return a.name.localeCompare(b.name);
     });
 
     // Group by style
@@ -408,6 +397,7 @@ export function loadCard(id) {
     document.getElementById("cardLore").value = data.lore || "";
     document.getElementById("cardAttack").value = data.attack || "";
     document.getElementById("cardDefence").value = data.defence || "";
+    document.getElementById("levelCost").value = data.levelCost || "";
 
     document.getElementById("costAsh").value = data.cost?.ash || "";
     document.getElementById("costTech").value = data.cost?.tech || "";
@@ -419,6 +409,27 @@ export function loadCard(id) {
     updateVisibleInputs();
     drawCard();
     return data.name;
+}
+
+function formToCardData() {
+    return {
+        id: currentCardId,
+        style: document.getElementById("cardStyle").value,
+        name: document.getElementById("cardName").value,
+        class: document.getElementById("cardClass").value,
+        desc: document.getElementById("cardDesc").value,
+        lore: document.getElementById("cardLore").value,
+        attack: document.getElementById("cardAttack").value,
+        defence: document.getElementById("cardDefence").value,
+        levelCost: document.getElementById("levelCost").value,
+        cost: {
+            ash: document.getElementById("costAsh").value,
+            tech: document.getElementById("costTech").value,
+            stoic: document.getElementById("costStoic").value,
+            chem: document.getElementById("costChem").value,
+            relic: document.getElementById("costRelic").value
+        }
+    };
 }
 
 export function exportDeckPNG() {
