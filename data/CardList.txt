@@ -1,0 +1,902 @@
+﻿[
+  {
+    "id": "card_30bbc49e-9d7d-41dd-99a8-00a1ffef649e",
+    "style": "Stratagem",
+    "name": "Expunge",
+    "class": "Ash Born",
+    "desc": "*Burst:* Deal X damage to an enemy or faction where X is the number of Rage tokens on the battlefield",
+    "lore": "Let the rage consume you",
+    "attack": "5",
+    "defence": "3",
+    "cost": {
+      "red": "3",
+      "blue": "",
+      "white": "",
+      "green": "",
+      "black": ""
+    }
+  },
+  {
+    "style": "Structure",
+    "name": "First Wave War Machine",
+    "class": "War Machine",
+    "desc": "*Vehicle:* 2/2\n*Rattle:* Build two Red Rider creatures - 1/1 Rage Born",
+    "lore": "\"The little critters would almost be cute, if it weren't for all the knives\"",
+    "attack": "5",
+    "defence": "3",
+    "cost": {
+      "red": "1",
+      "blue": "",
+      "white": "",
+      "green": "1",
+      "black": "1"
+    }
+  },
+  {
+    "style": "Creature",
+    "name": "First Wave Grunt",
+    "class": "Ash Born",
+    "desc": "*War Cry:* *Mania*",
+    "lore": "There are no small soldiers",
+    "attack": "1",
+    "defence": "1",
+    "cost": {
+      "red": "1",
+      "blue": "",
+      "white": "",
+      "green": "",
+      "black": ""
+    },
+    "id": "card_855e64c1-d894-4e88-9691-57133f73685f"
+  },
+  {
+    "id": "card_7aa50e02-5630-41d5-a4fc-9cb3745d6fb4",
+    "style": "Stratagem",
+    "name": "Widow's Wail",
+    "class": "",
+    "desc": "*Burst*\n*Scar 6*\n*Enraged* creatures have *First Strike* until the end of turn.",
+    "lore": "\"The road to peace is seldom clean\" - The Widow",
+    "attack": "",
+    "defence": "",
+    "cost": {
+      "red": "3",
+      "blue": "",
+      "white": "",
+      "green": "",
+      "black": "2"
+    }
+  },
+  {
+    "id": "card_56f44e21-af46-4419-85a1-33b973b30ef9",
+    "style": "Creature",
+    "name": "Ash Blood Rager",
+    "class": "Ash Born",
+    "desc": "*Mania*\nWhen a creature takes damage from _Ash Blood Rager_, give it *Rage*.",
+    "lore": "\"Apathy is a plague. We are the cure.\" - The Widow",
+    "attack": "5",
+    "defence": "3",
+    "cost": {
+      "red": "2",
+      "blue": "",
+      "white": "",
+      "green": "",
+      "black": "4"
+    }
+  },
+  {
+    "style": "Creature",
+    "name": "First Wave Grunt",
+    "class": "Ash Born",
+    "desc": "*War Cry:* *Mania*",
+    "lore": "There are no small soldiers",
+    "attack": "1",
+    "defence": "1",
+    "cost": {
+      "red": "1",
+      "blue": "",
+      "white": "",
+      "green": "",
+      "black": ""
+    }
+  },
+  {
+    "style": "Stratagem",
+    "name": "Ash Fall",
+    "class": "",
+    "desc": "*Burst:* *Corrupt* an enemy Frontline",
+    "lore": "Flesh. Metal. Friend. Foe. All will fall to Ash.",
+    "attack": "",
+    "defence": "",
+    "cost": {
+      "red": "3",
+      "blue": "",
+      "white": "",
+      "green": "",
+      "black": "5"
+    }
+  },
+  {
+    "style": "Creature",
+    "name": "First Wave Rager",
+    "class": "Ash Born",
+    "desc": "*Mania*",
+    "lore": "And the recipe never changed",
+    "attack": "4",
+    "defence": "3",
+    "cost": {
+      "red": "2",
+      "blue": "",
+      "white": "",
+      "green": "",
+      "black": "3"
+    }
+  },
+  {
+    "id": "card_d1002d71-2bf2-4edd-8c85-74d60ad77260",
+    "style": "Structure",
+    "name": "First Wave War Machine",
+    "class": "War Machine",
+    "desc": "*Vehicle:* 1/2",
+    "lore": "We'll fix it when it breaks",
+    "attack": "5",
+    "defence": "3",
+    "cost": {
+      "red": "1",
+      "blue": "",
+      "white": "",
+      "green": "",
+      "black": "1"
+    }
+  },
+  {
+    "id": "card_b103a555-1702-4797-be5e-d74c8710efa7",
+    "style": "Stratagem",
+    "name": "Overdose",
+    "class": "",
+    "desc": "*Corrupt* an enemy creature. Give it *Fragile* and _\"Destroy this card at the end of your turn.\"_",
+    "lore": "Too much of a good thing",
+    "attack": "",
+    "defence": "",
+    "cost": {
+      "red": "2",
+      "blue": "",
+      "white": "",
+      "green": "",
+      "black": "2"
+    }
+  },
+  {
+    "id": "card_1397bfec-33ff-4242-bfcb-70480117cec4",
+    "style": "Structure",
+    "name": "Fallen Flag",
+    "class": "Ash Factory",
+    "desc": "Each time a creature dies, deal X damage to the enemy faction, where X is the amount of *Rage* tokens it had.",
+    "lore": "The last cry is often the loudest",
+    "attack": "",
+    "defence": "",
+    "cost": {
+      "red": "2",
+      "blue": "",
+      "white": "",
+      "green": "",
+      "black": "1"
+    }
+  },
+  {
+    "id": "card_db95681a-e9bd-46a3-bcbf-3203d0ba09c1",
+    "style": "Leader",
+    "name": "Widow Raine - Fallen",
+    "class": "Ash Weaver",
+    "desc": "*Level 1+:* _Allies on your Front get \"Enrage X/0\" where X is _Widow Raine's_ level.\n*Level 2+:* Allies played to your Front gain *Mania*.\n*Level 3+:* If an enemy on _Widow Raine's_ Front would be killed, *Corrupt* it and give it *Rage*, instead.",
+    "lore": "\"They only see what is taken. Not what was lost.\"",
+    "attack": "1",
+    "defence": "2",
+    "cost": {
+      "red": "1",
+      "blue": "",
+      "white": "",
+      "green": "",
+      "black": "3"
+    }
+  },
+  {
+    "id": "card_5ce470d9-058d-4cef-b94f-624497503c45",
+    "style": "Creature",
+    "name": "Greased Swifthound",
+    "class": "Ash Beast",
+    "desc": "*Swift*\n*Unblockable*",
+    "lore": "Slippery little bas-",
+    "attack": "1",
+    "defence": "1",
+    "cost": {
+      "red": "1",
+      "blue": "",
+      "white": "",
+      "green": "",
+      "black": "1"
+    }
+  },
+  {
+    "style": "Augment",
+    "name": "Grave Mask",
+    "class": "",
+    "desc": "*Corrupt* an enemy of cost 4 or less and *Augment* it.\n*Augment:* *Mania*",
+    "lore": "It's not a mask. It's a new face.",
+    "attack": "",
+    "defence": "",
+    "cost": {
+      "red": "2",
+      "blue": "",
+      "white": "",
+      "green": "",
+      "black": ""
+    }
+  },
+  {
+    "style": "Augment",
+    "name": "Grave Mask",
+    "class": "",
+    "desc": "*Corrupt* an enemy of cost 4 or less and *Augment* it.\n*Augment:* *Mania*",
+    "lore": "It's not a mask. It's a new face.",
+    "attack": "",
+    "defence": "",
+    "cost": {
+      "red": "2",
+      "blue": "",
+      "white": "",
+      "green": "",
+      "black": ""
+    },
+    "id": "card_f571a3fe-15fb-4a9c-9caf-8d1c8b8dff30"
+  },
+  {
+    "id": "card_54985bcf-e23d-4534-8f71-8c519612b679",
+    "style": "Creature",
+    "name": "Eran - Herald of Ash",
+    "class": "Ash Worker",
+    "desc": "*Taunter*\n*Bloodlust*: *Corrupt* and *Rage*\nWhen a creature gains a *Rage* token, *Draw*.",
+    "lore": "\"Once, I was stoic. I led legions against her and with cold logic, knew that it was right. She has shown me truth.\"",
+    "attack": "7",
+    "defence": "7",
+    "cost": {
+      "red": "3",
+      "blue": "",
+      "white": "",
+      "green": "",
+      "black": "6"
+    }
+  },
+  {
+    "id": "card_107870b9-57c7-41a3-b879-c035728b3ef7",
+    "style": "Creature",
+    "name": "Explosive Emule",
+    "class": "Ash Beast",
+    "desc": "*Rattle:* Deal 2 damage to an enemy faction",
+    "lore": "\"...Imagine if it had real cannons\" - Ash Weaver Renn",
+    "attack": "1",
+    "defence": "2",
+    "cost": {
+      "red": "1",
+      "blue": "",
+      "white": "",
+      "green": "",
+      "black": ""
+    }
+  },
+  {
+    "id": "card_d9bd249d-c7a6-450c-b51d-6ea516874a45",
+    "style": "Leader",
+    "name": "Widow Raine",
+    "class": "Ash Weaver",
+    "desc": "*Passive:* Creatures in your lane have \"Enrage X: X/0\".\n*Mania X:* Where X is this creature's level\n",
+    "lore": "\"They only see what is taken. Not what was lost.\"",
+    "attack": "1",
+    "defence": "2",
+    "cost": {
+      "red": "2",
+      "blue": "",
+      "white": "",
+      "green": "",
+      "black": "2"
+    }
+  },
+  {
+    "style": "Stratagem",
+    "name": "See Red",
+    "class": "",
+    "desc": "Give all creatures a *Rage* token",
+    "lore": "\"For them it is poison. For us it is life.\" - Ash Weaver",
+    "attack": "",
+    "defence": "",
+    "cost": {
+      "red": "6",
+      "blue": "",
+      "white": "",
+      "green": "",
+      "black": ""
+    }
+  },
+  {
+    "id": "card_bfd8c23c-5e23-43a1-bed1-ed9d737d4a02",
+    "style": "Creature",
+    "name": "Ash Tender",
+    "class": "Ash Worker",
+    "desc": "Ash type cards cost 1 less power.",
+    "lore": "\"Even the lamest sprout may become a mighty tree\"",
+    "attack": "3",
+    "defence": "6",
+    "cost": {
+      "red": "3",
+      "blue": "",
+      "white": "",
+      "green": "",
+      "black": "3"
+    }
+  },
+  {
+    "id": "card_b5bc4fb1-8eb8-4407-90e4-01900844cdd1",
+    "style": "Creature",
+    "name": "Scavenging Swifthound",
+    "class": "Ash Beast",
+    "desc": "*Rattle:* Draw",
+    "lore": "\"Who's a good boy?!\" - Ash Weaver Renn",
+    "attack": "2",
+    "defence": "2",
+    "cost": {
+      "red": "1",
+      "blue": "",
+      "white": "",
+      "green": "",
+      "black": "1"
+    }
+  },
+  {
+    "style": "Stratagem",
+    "name": "Expunge",
+    "class": "Ash Born",
+    "desc": "*Burst:* Deal X damage to an enemy or faction where X is the number of Rage tokens on the battlefield",
+    "lore": "Let the rage consume you",
+    "attack": "5",
+    "defence": "3",
+    "cost": {
+      "red": "3",
+      "blue": "",
+      "white": "",
+      "green": "",
+      "black": ""
+    }
+  },
+  {
+    "id": "card_1d33f4cb-4958-4137-9693-8fc0aaefe93f",
+    "style": "Stratagem",
+    "name": "See Red",
+    "class": "",
+    "desc": "Give all creatures a *Rage* token",
+    "lore": "\"For them it is poison. For us it is life.\" - Ash Weaver Renn",
+    "attack": "",
+    "defence": "",
+    "cost": {
+      "red": "6",
+      "blue": "",
+      "white": "",
+      "green": "",
+      "black": ""
+    }
+  },
+  {
+    "id": "card_51f9acb8-dbd7-4e8f-9224-66caf4c8bd0f",
+    "style": "Creature",
+    "name": "Ash Forged Knight",
+    "class": "Ash Born",
+    "desc": "*Mania*",
+    "lore": "",
+    "attack": "4",
+    "defence": "3",
+    "cost": {
+      "red": "1",
+      "blue": "",
+      "white": "",
+      "green": "",
+      "black": "3"
+    }
+  },
+  {
+    "id": "card_35f587ff-3378-4940-b118-fc7c985ed0bb",
+    "style": "Creature",
+    "name": "First Wave Rager",
+    "class": "Ash Born",
+    "desc": "*Mania*",
+    "lore": "And the recipe never changed",
+    "attack": "3",
+    "defence": "3",
+    "cost": {
+      "red": "2",
+      "blue": "",
+      "white": "",
+      "green": "",
+      "black": "2"
+    }
+  },
+  {
+    "id": "card_22633d09-fc15-4acc-b029-abd2f06cfcba",
+    "style": "Creature",
+    "name": "Ash Born Tamer",
+    "class": "",
+    "desc": "Ash Beasts you control have *Mania*",
+    "lore": "",
+    "attack": "",
+    "defence": "",
+    "cost": {
+      "red": "2",
+      "blue": "",
+      "white": "",
+      "green": "",
+      "black": "3"
+    }
+  },
+  {
+    "id": "card_343219fb-05fa-40a3-892f-441327825e17",
+    "style": "Creature",
+    "name": "Red Seer",
+    "class": "Ash Worker",
+    "desc": "*Prep Phase* - *Divine*",
+    "lore": "\"The Ash is so much more than some simple drug. There are wonders the patterns we weave\"",
+    "attack": "3",
+    "defence": "5",
+    "cost": {
+      "red": "1",
+      "blue": "",
+      "white": "",
+      "green": "",
+      "black": "2"
+    }
+  },
+  {
+    "style": "Creature",
+    "name": "Ash Runner",
+    "class": "Ash Worker",
+    "desc": "*Reveal:* Corrupt an enemy of cost 3 or less and give it *Rage*",
+    "lore": "Eager feet run the fastest",
+    "attack": "2",
+    "defence": "1",
+    "cost": {
+      "red": "2",
+      "blue": "",
+      "white": "",
+      "green": "",
+      "black": "5"
+    }
+  },
+  {
+    "id": "card_9cf1393e-cae6-4aeb-be65-f1e8f5de3a33",
+    "style": "Structure",
+    "name": "First Wave Tank",
+    "class": "War Machine",
+    "desc": "*Vehicle:* 1/3\n*Rattle:* Build 2 Red Rider Creatures - 1/1 Rage Born",
+    "lore": "\"The drivers are as small as they are angry\"",
+    "attack": "5",
+    "defence": "3",
+    "cost": {
+      "red": "2",
+      "blue": "",
+      "white": "",
+      "green": "",
+      "black": "2"
+    }
+  },
+  {
+    "style": "Creature",
+    "name": "Forgotten Soldier",
+    "class": "Ash Born",
+    "desc": "Mania",
+    "lore": "\"It takes a while, but it always takes\"\n- Ash Weaver",
+    "attack": "1",
+    "defence": "1",
+    "cost": {
+      "red": "1",
+      "blue": "",
+      "white": "",
+      "green": "",
+      "black": "1"
+    }
+  },
+  {
+    "style": "Creature",
+    "name": "Lab Worker",
+    "class": "Ash Worker",
+    "desc": "*Charge*: 1 Ash",
+    "lore": "",
+    "attack": "2",
+    "defence": "2",
+    "cost": {
+      "red": "2",
+      "blue": "",
+      "white": "",
+      "green": "",
+      "black": "1"
+    }
+  },
+  {
+    "id": "card_3edc4723-25e5-44a2-ad7d-fdc1800c8291",
+    "style": "Structure",
+    "name": "Ash Mill",
+    "class": "Ash Factory",
+    "desc": "Each time a creature gains a *Rage* token you may draw a card, if you do, discard a card.",
+    "lore": "\"The more we take, the faster we'll grow\" - The Widow",
+    "attack": "",
+    "defence": "",
+    "cost": {
+      "red": "2",
+      "blue": "",
+      "white": "",
+      "green": "",
+      "black": "1"
+    }
+  },
+  {
+    "id": "card_d76b7673-6182-438a-bcc4-7301e4d0d949",
+    "style": "Structure",
+    "name": "Red Steel Armory",
+    "class": "Ash Factory",
+    "desc": "When you play an _Ash Worker_ give it *Shield 1*.",
+    "lore": "",
+    "attack": "",
+    "defence": "",
+    "cost": {
+      "red": "3",
+      "blue": "",
+      "white": "",
+      "green": "",
+      "black": ""
+    }
+  },
+  {
+    "style": "Creature",
+    "name": "Singer of the Cause",
+    "class": "Ash Born",
+    "desc": "*War Cry:* Creatures in this strike have *Mania* until the end of turn",
+    "lore": "",
+    "attack": "2",
+    "defence": "6",
+    "cost": {
+      "red": "2",
+      "blue": "",
+      "white": "",
+      "green": "1",
+      "black": "3"
+    }
+  },
+  {
+    "id": "card_365d1c3e-8c6c-4c8e-be8a-9d94cfa4fe3c",
+    "style": "Creature",
+    "name": "Ash Runner",
+    "class": "Ash Worker",
+    "desc": "*Reveal:* Corrupt an enemy of cost 3 or less and give it *Rage*",
+    "lore": "Eager feet run the fastest",
+    "attack": "2",
+    "defence": "1",
+    "cost": {
+      "red": "2",
+      "blue": "",
+      "white": "",
+      "green": "",
+      "black": "5"
+    }
+  },
+  {
+    "id": "card_e810aecb-7399-4750-bdac-eae41b43d854",
+    "style": "Creature",
+    "name": "Red Harvester ",
+    "class": "Ash Worker",
+    "desc": "*Bloodlust:* Cycle any number of cards and *Charge 1 Ash* for each",
+    "lore": "\"Nothing goes to waste\" - Herald of Ash",
+    "attack": "",
+    "defence": "",
+    "cost": {
+      "red": "2",
+      "blue": "",
+      "white": "",
+      "green": "",
+      "black": "2"
+    }
+  },
+  {
+    "id": "card_e4b1e048-acc5-49a9-a7c8-f2d03db2d833",
+    "style": "Creature",
+    "name": "Ash Weaver Renn",
+    "class": "Ash Worker",
+    "desc": "*Brutal*\n*Strike:* *Corrupt* an enemy and give it *Rage*",
+    "lore": "\"A foe is a friend you haven't made yet\"",
+    "attack": "5",
+    "defence": "7",
+    "cost": {
+      "red": "3",
+      "blue": "",
+      "white": "",
+      "green": "",
+      "black": "4"
+    }
+  },
+  {
+    "style": "Structure",
+    "name": "Engine of Change",
+    "class": "Relic Structure",
+    "desc": "*Relic*\nEach time a token is added to the battlefield, you may add a token of the same type to an allied creature.",
+    "lore": "\"What concerns me is the delay. It's not simply reflecting the data we beam at it, it seems to first absorb them. Why?\" - Dr. Eris Blane",
+    "attack": "5",
+    "defence": "3",
+    "cost": {
+      "red": "",
+      "blue": "",
+      "white": "",
+      "green": "",
+      "black": "5"
+    }
+  },
+  {
+    "style": "Creature",
+    "name": "Ash Blood Rager",
+    "class": "Ash Born",
+    "desc": "*Mania*\n*War Cry:* Put a rage token on any creature that blocks this creature",
+    "lore": "\"Apathy is a plague. We are the cure.\" - The Widow",
+    "attack": "5",
+    "defence": "3",
+    "cost": {
+      "red": "3",
+      "blue": "",
+      "white": "",
+      "green": "",
+      "black": "4"
+    }
+  },
+  {
+    "style": "Augment",
+    "name": "Ash Reserves",
+    "class": "",
+    "desc": "*Mania 2*",
+    "lore": "More rage. More power.",
+    "attack": "",
+    "defence": "",
+    "cost": {
+      "red": "3",
+      "blue": "",
+      "white": "",
+      "green": "",
+      "black": ""
+    }
+  },
+  {
+    "style": "Leader",
+    "name": "Widow Raine",
+    "class": "Ash Weaver",
+    "desc": "*Passive:* Creatures in your lane have \"Enrage X: 2X/0\".\n*Mania X:* Where X is this creature's level\n",
+    "lore": "\"They only see what is taken. Not what was lost.\"",
+    "attack": "1",
+    "defence": "2",
+    "cost": {
+      "red": "2",
+      "blue": "",
+      "white": "",
+      "green": "",
+      "black": "2"
+    }
+  },
+  {
+    "id": "card_b30a8290-fb85-4e39-b260-1b4980ab5e41",
+    "style": "Creature",
+    "name": "Ash Mad Weaver",
+    "class": "Ash Worker",
+    "desc": "*Prep:* Destroy all creatures",
+    "lore": "The Weavers' Art harms no one more than its practitioners.",
+    "attack": "2",
+    "defence": "2",
+    "cost": {
+      "red": "",
+      "blue": "",
+      "white": "",
+      "green": "",
+      "black": ""
+    }
+  },
+  {
+    "id": "card_00db4cce-f0b7-4720-943f-bd8d606f76f6",
+    "style": "Stratagem",
+    "name": "Ash Burst",
+    "class": "",
+    "desc": "*Corrupt* up to two creatures of cost 2 or less and give them *Rage*",
+    "lore": "They will come.",
+    "attack": "",
+    "defence": "",
+    "cost": {
+      "red": "2",
+      "blue": "",
+      "white": "",
+      "green": "",
+      "black": "3"
+    }
+  },
+  {
+    "id": "card_20acee08-7176-45e3-93c7-2e16a6ebe7aa",
+    "style": "Structure",
+    "name": "First Wave Carrier",
+    "class": "War Machine",
+    "desc": "*Vehicle:* 2/2\n*Flying*",
+    "lore": "\"The drivers are as small as they are angry\"",
+    "attack": "5",
+    "defence": "3",
+    "cost": {
+      "red": "2",
+      "blue": "",
+      "white": "",
+      "green": "",
+      "black": "3"
+    }
+  },
+  {
+    "style": "Creature",
+    "name": "Grease Hound",
+    "class": "Ash Beast",
+    "desc": "Cannot be blocked",
+    "lore": "Slippery little bas-",
+    "attack": "2",
+    "defence": "1",
+    "cost": {
+      "red": "1",
+      "blue": "",
+      "white": "",
+      "green": "1",
+      "black": ""
+    }
+  },
+  {
+    "id": "card_f73cca97-c38a-4d82-8f23-bc27386a6661",
+    "style": "Creature",
+    "name": "Rage-Fueled Swifthound",
+    "class": "Rage Born/Ash Beast",
+    "desc": "*Swift*\n*Unrelenting*\n*Mania 3*",
+    "lore": "Play dead. It's good practice.",
+    "attack": "1",
+    "defence": "1",
+    "cost": {
+      "red": "3",
+      "blue": "",
+      "white": "",
+      "green": "",
+      "black": ""
+    }
+  },
+  {
+    "id": "card_c66c34bd-c1f2-4a71-8dba-76020fd851c0",
+    "style": "Creature",
+    "name": "Forgotten Soldier",
+    "class": "Ash Born",
+    "desc": "Mania",
+    "lore": "\"It takes a while, but it always takes\"\n- Ash Weaver",
+    "attack": "1",
+    "defence": "1",
+    "cost": {
+      "red": "1",
+      "blue": "",
+      "white": "",
+      "green": "",
+      "black": "1"
+    }
+  },
+  {
+    "style": "Stratagem",
+    "name": "Ash Burst",
+    "class": "",
+    "desc": "*Corrupt* up to two creatures of cost 2 or less",
+    "lore": "They will come.",
+    "attack": "",
+    "defence": "",
+    "cost": {
+      "red": "2",
+      "blue": "",
+      "white": "",
+      "green": "",
+      "black": "3"
+    }
+  },
+  {
+    "id": "card_52128308-29f5-41c2-a899-bfcf9f930314",
+    "style": "Creature",
+    "name": "Singer of the Cause",
+    "class": "Ash Born",
+    "desc": "*War Cry:* Attacking creatures gain *Mania* until the end of turn.",
+    "lore": "\"Lend an ear\"",
+    "attack": "2",
+    "defence": "6",
+    "cost": {
+      "red": "2",
+      "blue": "",
+      "white": "",
+      "green": "",
+      "black": "3"
+    }
+  },
+  {
+    "id": "card_e6879961-4316-4e96-839a-9986a99e73b1",
+    "style": "Stratagem",
+    "name": "Ash Fall",
+    "class": "",
+    "desc": "*Reveal: Burst:* *Corrupt* an enemy Frontline and give it *Rage*",
+    "lore": "Flesh. Metal. Friend. Foe. All will fall to Ash.",
+    "attack": "",
+    "defence": "",
+    "cost": {
+      "red": "3",
+      "blue": "",
+      "white": "",
+      "green": "",
+      "black": "4"
+    }
+  },
+  {
+    "id": "card_efbd65c0-8d10-4e48-8dab-9533c814e988",
+    "style": "Creature",
+    "name": "Emule Bombardier",
+    "class": "Ash Beast",
+    "desc": "*War Cry:* Deal 2 damage to all enemies",
+    "lore": "\"Who strapped cannons to the damn thing?!\"",
+    "attack": "2",
+    "defence": "3",
+    "cost": {
+      "red": "1",
+      "blue": "",
+      "white": "",
+      "green": "",
+      "black": "3"
+    }
+  },
+  {
+    "id": "card_24bb2bad-ba25-4ce5-847b-c59cf51a6794",
+    "style": "Creature",
+    "name": "Lab Worker",
+    "class": "Ash Worker",
+    "desc": "*Charge*: 1 Ash",
+    "lore": "There are no small jobs",
+    "attack": "1",
+    "defence": "2",
+    "cost": {
+      "red": "2",
+      "blue": "",
+      "white": "",
+      "green": "",
+      "black": "1"
+    }
+  },
+  {
+    "id": "card_c1a10e5f-ac7b-4249-9414-9279297be71b",
+    "style": "Creature",
+    "name": "Forgotten Soldier",
+    "class": "Ash Born",
+    "desc": "Mania",
+    "lore": "\"It takes a while, but it always takes\"\n- Ash Weaver",
+    "attack": "1",
+    "defence": "1",
+    "cost": {
+      "red": "2",
+      "blue": "",
+      "white": "",
+      "green": "",
+      "black": "1"
+    }
+  },
+  {
+    "style": "Creature",
+    "name": "Ash Spreader",
+    "class": "Ash Weaver",
+    "desc": "When this creature damages a Faction, *Corrupt* an enemy on its front and give it *Rage*",
+    "lore": "\"A foe is a friend you haven't made yet\"",
+    "attack": "2",
+    "defence": "7",
+    "cost": {
+      "red": "3",
+      "blue": "",
+      "white": "",
+      "green": "",
+      "black": "5"
+    }
+  }
+]

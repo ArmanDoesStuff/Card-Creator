@@ -48,8 +48,8 @@ function renderDeckDetails(stats) {
 
     div.innerHTML = `
         <div>Leader: ${stats.leaderCount}/1</div>
-        <div>Regulars: ${stats.otherCount}/50</div>
-        <div>Backlines: ${stats.backlineCount}/9</div>
+        <div>Regulars: ${stats.otherCount}/40</div>
+        <div>Backlines: ${stats.backlineCount}/20</div>
     `;
 }
 
@@ -62,7 +62,7 @@ function computeCostStats(cardList) {
 
     for (const cardId of cardList) {
         const card = loadCard(cardId);
-        if (!card || !card.cost) continue;
+        if (!card || !card.cost || card.style === "Backline") continue;
 
         const totalCost =
             (parseInt(card.cost.ash) || 0) +
